@@ -1,8 +1,7 @@
-# Desde nano
+from random import choice,random
 
-print("Esto pa Git")
+a = [1,2,3,4]
+print(choice(a))
+print(random())
 
-print("Desde develop")
-
-# Esto sera agregado desde ops.sh
  
