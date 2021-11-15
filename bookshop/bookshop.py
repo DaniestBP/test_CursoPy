@@ -1,6 +1,11 @@
 ########################     Function creation exercice: managing a bookshop
 # comented
 
+from functools import total_ordering
+from os import path
+
+cwd = path.dirname(__file__)
+
 DB = [{
     "id": "cf_1",
     "title": "El hombre bicentenario",
@@ -116,10 +121,10 @@ def pretty_book(book):
         print(f"{k}: {v}")
 
 
-def get_by_term(term, search_tearm):
+def get_by_term(term, search_term):
     result = []
     for book in DB:
-        if book[term].lower().find(search_tearm.lower()) >= 0:
+        if book[term].lower().find(search_term.lower()) >= 0:
             result.append(book)    
     return result        
 
@@ -130,7 +135,15 @@ def update_book(book):
         if user:
             book[k] = user
        
+def write_to_record(search_term, to_write):
+    with open(f"{cwd}/test.txt", mode="a") as file:
+        if type(to_write) == dict:
+            file.write(f"Se ha buscado {search_term}: {to_write['author']} - {to_write['title']}\n")
+        elif type(to_write) == list:
+            file.writelines(to_write)
+            
 
+    
 
 
 user = "0"
