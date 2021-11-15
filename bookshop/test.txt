@@ -1,0 +1,7 @@
+*************Record**********
+
+aa_1: Ekhart Tolle - El poder del ahora
+dc_1: Antonio Damasio - El error de Descartes
+dc_5: Dmitri Glujovski - Metro 2033
+dc_5: Hermann Hesse - Sidharta
+Se ha buscado dc_2: Jennifer Ackerman - El ingenio de los pájaros
