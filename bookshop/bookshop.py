@@ -3,6 +3,7 @@
 
 from functools import total_ordering
 from os import path
+import csv
 
 cwd = path.dirname(__file__)
 
@@ -68,7 +69,38 @@ DB = [{
 },
 ]
 
+# DB = []
+
 genres = ["Narrativa extranjera", "Divulgación científica", "Narrativa policíaca", "Ciencia ficción", "Autoayuda"]
+
+user = "0"
+
+
+
+def read_csv(dataset, file_name):
+    with open(file_name, mode="r", enconding ="utf8")as file:
+        csv_reader= csv.reader(file, delimiter=";")
+        next(csv_reader)
+        for row in csv_reader:
+            new_dict = {
+                "id" : row[1],
+                "author": row[0],
+                "title": row[1],
+                "genre": row[2]
+            }
+            DB.append(new_dict)
+
+read_csv(DB, "books.csv")
+    
+
+
+def export_csv(dataset, file_name):
+    with open(file_name, mode="w", newline="", encoding="utf8")as file:
+        csv_writer= csv.writer(file, delimiter = ";")
+        csv_writer.writerow(["id", "author", "title", "genre"])
+        for entry in dataset:
+           csv_writer.writerow(entry.values())
+
 
 
 
@@ -143,10 +175,7 @@ def write_to_record(search_term, to_write):
             file.writelines(to_write)
             
 
-    
 
-
-user = "0"
 
 # while user != "q":
 #     menu()
@@ -170,45 +199,3 @@ user = "0"
 #         else:
 #             print("No se ha encontrado NINGÚN RESULTADO")
 
-#     elif user == "3":
-#         user = input("Escriba el Autor:  ")
-#         books = get_by_term ("author", user)
-#         if len(books):
-#             for book in books:
-#                 pretty_book(book)
-#         else:
-#             print("No se ha encontrado NINGÚN RESULTADO")
-        
-#     elif user == "4":
-#         for i, genre in enumerate(genres):
-#             print(f"{i+1}, {genre}")
-
-#         user = int(input("Género Nº: ")) - 1
-#         user = genres[user]
-
-#         books = get_by_term ("genre", user)
-#         if len(books):
-#             for book in books:
-#                 pretty_book(book)
-#         else:
-#             print("No se ha encontrado NINGÚN RESULTADO")
-#         input()
-    
-#     elif user == "5":
-#         user = input("Buscar libro a mofificar por ID: ")   
-#         book_to_update = search_id(user)
-#         if book_to_update:
-#             update_book(book_to_update)
-#         else:
-#             print("La informacion proporcionada no coincide con nuestra base de datos")
-#         print(DB)
-
-#     elif user == "6":
-#         user = input("Buscar libro a eliminar por ID: ")
-#         book_to_erase = search_id(user)
-#         if book_to_erase:
-#             DB.remove(book_to_erase)
-        
-#         print(DB)
-
-     
