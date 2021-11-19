@@ -1,15 +1,12 @@
 from bookshop import *
 from os import path
 
-from bookshop import write_to_record
-
-
 
 cwd = path.dirname(__file__)
 
 
-with open(f"{cwd}/errors.log", mode="a") as file:
-    file.write("Error 1: Missing User ID")
+# with open(f"{cwd}/errors.log", mode="a") as file:
+#     file.write("Error 1: Missing User ID")
 
 # fichero = open("./lectura/test.txt")
 # lectura = fichero.read()
@@ -70,9 +67,10 @@ while user != "q":
         user = genres[user]
         books = get_by_term ("genre", user)
 
-        write_to_record(user, f"{books["author"]} - {books["title"]}\n")
+        # write_to_record(user, f"{book["author"]} - {book["title"]}\n")
         
         if len(books):
+            # write_to_record(user,[f"{book["author"]} - {book["title"]}\n") for book in books
             for book in books:
                 pretty_book(book)
         else:
@@ -96,4 +94,11 @@ while user != "q":
         
         print(DB)
 
-    
+    elif user == "q":
+        user = input("Desea guardar los datos (Y/N)? ")
+        if user.lower() == "y":
+            export_csv(DB,"books.csv")
+                
+            user = "q"
+
+user = "0"
