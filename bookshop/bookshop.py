@@ -1,7 +1,7 @@
 ########################     Function creation exercice: managing a bookshop
 # comented
 
-from functools import total_ordering
+# from functools import total_ordering
 from os import path
 import csv
 
@@ -76,7 +76,6 @@ genres = ["Narrativa extranjera", "Divulgación científica", "Narrativa policí
 user = "0"
 
 
-
 def read_csv(dataset, file_name):
     with open(file_name, mode="r", enconding ="utf8")as file:
         csv_reader= csv.reader(file, delimiter=";")
@@ -90,14 +89,14 @@ def read_csv(dataset, file_name):
             }
             DB.append(new_dict)
 
-read_csv(DB, "books.csv")
+# read_csv(DB, "books.csv")
     
 
 
 def export_csv(dataset, file_name):
     with open(file_name, mode="w", newline="", encoding="utf8")as file:
         csv_writer= csv.writer(file, delimiter = ";")
-        csv_writer.writerow(["id", "author", "title", "genre"])
+        csv_writer.writerow(["id", "title", "author", "genre"])
         for entry in dataset:
            csv_writer.writerow(entry.values())
 
@@ -106,16 +105,16 @@ def export_csv(dataset, file_name):
 
 
 def menu():
-    print("BIENVENIDO A LIBRERIA FANTASIA".center(90, "-"))
-    print("Busque su libro".center(30))
-    print("1. Id: " + (" "* (49 - len("1. Id: "))) + "#")
-    print("2. Title: " + (" "* (49 - len("2. Title: "))) + "#")
-    print("3. Author: " + (" "* (49 - len("3. Author: "))) + "#")
-    print("4. Genre: " + (" "* (49 - len("4. Genre: "))) + "#")
-    print("5. Update: " + (" "* (49 - len("5. Update: "))) + "#")
-    print("6. Eliminar libros: " + (" "* (49 - len("6. Eliminar libros: "))) + "#")
-    print("Q. Salir: " + (" "* (49 - len("Q. Salir: "))) + "#")
-    print("#"*50)
+    print("\n" + "BIENVENIDO A LIBRERIA FANTASIA".center(190, "-")+"\n")
+    print("\n" + "Busque su libro".center(130)+"\n"+"\n")
+    print("1. Id: " + (" "* (149 - len("1. Id: "))) + "#"+"\n")
+    print("2. Title: " + (" "* (149 - len("2. Title: "))) + "#"+"\n")
+    print("3. Author: " + (" "* (149 - len("3. Author: "))) + "#"+"\n")
+    print("4. Genre: " + (" "* (149 - len("4. Genre: "))) + "#"+"\n")
+    print("5. Update: " + (" "* (149 - len("5. Update: "))) + "#"+"\n")
+    print("6. Eliminar libros: " + (" "* (149 - len("6. Eliminar libros: "))) + "#"+"\n")
+    print("Q. Salir: " + (" "* (149 - len("Q. Salir: "))) + "#"+"\n")
+    print("\n" + "#"*150)
 
 
 
@@ -168,7 +167,7 @@ def update_book(book):
             book[k] = user
        
 def write_to_record(search_term, to_write):
-    with open(f"{cwd}/test.txt", mode="a") as file:
+    with open(f"{cwd}/test.txt", mode="a+", encoding="utf8") as file:
         if type(to_write) == dict:
             file.write(f"Se ha buscado {search_term}: {to_write['author']} - {to_write['title']}\n")
         elif type(to_write) == list:

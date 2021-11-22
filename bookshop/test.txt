@@ -4,4 +4,41 @@ aa_1: Ekhart Tolle - El poder del ahora
 dc_1: Antonio Damasio - El error de Descartes
 dc_5: Dmitri Glujovski - Metro 2033
 dc_5: Hermann Hesse - Sidharta
-Se ha buscado dc_2: Jennifer Ackerman - El ingenio de los p�jaros
+Se ha buscado dc_2: Jennifer Ackerman - El ingenio de los p�jaros
+Se ha buscado dc_1: Antonio Damasio - El error de Descartes
+Se ha buscado Narrativa extranjera: Jack London - Lobo de mar
+Se ha buscado Narrativa extranjera: Hermann Hesse - Sidharta
+Se ha buscado Narrativa extranjera: Ekhart Tolle - El poder del ahora
+Se ha buscado Divulgación científica: Antonio Damasio - El error de Descartes
+Se ha buscado Divulgación científica: Dmitri Glujovski - Metro 2033
+Se ha buscado dc_1: Antonio Damasio - El error de Descartes
+Se ha buscado dc_1: Antonio Damasio - El error de Descartes
+Se ha buscado Metro: Dmitri Glujovski - Metro 2033
+Se ha buscado Josep: Joseph Conrad - El corazón de las tinieblas
+Se ha buscado josep: Joseph Conrad - El corazón de las tinieblas
+Se ha buscado Narrativa policíaca: Dolores Redondo - El legado de los huesos
+Se ha buscado Divulgación científica: Antonio Damasio - El error de Descartes
+Se ha buscado Divulgación científica: Dmitri Glujovski - Metro 2033
+Se ha buscado aa_1: Ekhart Tolle - El poder del ahora
+Se ha buscado dc_2: Valeria Gonçalves - El ingenio de los pájaros
+Se ha buscado dc_2: Jennifer Ackerman - El ingenio de los pájaros
+Se ha buscado dc_2: Jennifer Ackerman - El ingenio de los pájaros
+Se ha buscado dc_2: Jennifer Ackerman - El ingenio de los pájaros
+Se ha buscado np_1: Dolores Redondo - El legado de los huesos
+Se ha buscado ne_1: Jack London - Lobo de mar
+Se ha buscado Ciencia ficción: Isaac Asimov - El hombre bicentenario
+Se ha buscado ne_1: Jack Londres - Lobo de mar
+Se ha buscado jack: Jack Londres - Lobo de mar
+Se ha buscado ne_1: Jack Londres - Lobo de mar
+Se ha buscado Narrativa policíaca: Dolores Redondo - El legado de los huesos
+Se ha buscado Divulgación científica: Antonio Damasio - El error de Descartes
+Se ha buscado Divulgación científica: Dmitri Glujovski - Metro 2033
+Se ha buscado jack: Jack London - Lobo de mar
+Se ha buscado ne_1: Jack Londres - Lobo de mar
+Se ha buscado jack: Jack London - Lobo de mar
+Se ha buscado ne_1: Jack London - Lobo de mar
+Se ha buscado Ciencia ficción: Isaac Asimov - El hombre bicentenario
+Se ha buscado jack: Jack London - Lobo de mar
+Se ha buscado cf_1: Isaac Asimov - El hombre tricentenario
+Se ha buscado Is: Isaac Asimov - El hombre bicentenario
+Se ha buscado cf_1: Isaac Asimov - El hombre bicenternario

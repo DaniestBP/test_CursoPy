@@ -1,8 +1,4 @@
 from bookshop import *
-from os import path
-
-
-cwd = path.dirname(__file__)
 
 
 # with open(f"{cwd}/errors.log", mode="a") as file:
@@ -30,7 +26,7 @@ while user != "q":
 
     user = input(": ")
     if user == "1":
-        user = input("Escriba el ID: ")
+        user = input("Escriba el ID: ").lower()
         books = get_by_term ("id", user)
         if len(books):
             for book in books:
@@ -38,8 +34,8 @@ while user != "q":
                 write_to_record(user, book)
  
         else:
-            print("No se ha encontrado NINGÚN RESULTADO")
-        
+            print("\n"+" No se ha encontrado NINGÚN RESULTADO ".center(190,"*")+"\n")
+        input()
     
     elif user == "2":
         user = input("Escriba el Titulo:  ")
@@ -47,43 +43,47 @@ while user != "q":
         if len(books):
             for book in books:
                 pretty_book(book)
+                write_to_record(user, book)
         else:
-            print("No se ha encontrado NINGÚN RESULTADO")
-
+            print("\n"+" No se ha encontrado NINGÚN RESULTADO ".center(190,"*")+"\n")
+       
     elif user == "3":
         user = input("Escriba el Autor:  ")
         books = get_by_term ("author", user)
         if len(books):
             for book in books:
                 pretty_book(book)
+                write_to_record(user, book)
         else:
-            print("No se ha encontrado NINGÚN RESULTADO")
+            print("\n"+" No se ha encontrado NINGÚN RESULTADO ".center(190,"*")+"\n")
         
     elif user == "4":
         for i, genre in enumerate(genres):
-            print(f"{i + 1}, {genre}")
+            print(f"{i + 1}. {genre}")
 
         user = int(input("Género Nº: ")) -1
         user = genres[user]
         books = get_by_term ("genre", user)
-
-        # write_to_record(user, f"{book["author"]} - {book["title"]}\n")
-        
-        if len(books):
-            # write_to_record(user,[f"{book["author"]} - {book["title"]}\n") for book in books
-            for book in books:
-                pretty_book(book)
-        else:
-            print("No se ha encontrado NINGÚN RESULTADO")
+       
+        for i, book in enumerate(books):
+            pretty_book(book)
+            print("-"*50)
+            if i % 2 == 0:
+                input("Siguiente: ")
+                write_to_record(user, book)    
         input()
+                
+
     
     elif user == "5":
         user = input("Buscar libro a mofificar por ID: ")   
         book_to_update = search_id(user)
         if book_to_update:
             update_book(book_to_update)
+            write_to_record(user, book_to_update)
+            print(f"El libro {book_to_update['title']} se ha mofificado".center(175, "*")+ "\n")
         else:
-            print("La informacion proporcionada no coincide con nuestra base de datos")
+            print("La informacion proporcionada no coincide con nuestra base de datos".center(190,"*")+"\n")
         print(DB)
 
     elif user == "6":
@@ -91,14 +91,20 @@ while user != "q":
         book_to_erase = search_id(user)
         if book_to_erase:
             DB.remove(book_to_erase)
-        
+            print(f"El libro {book_to_erase['title']} se ha eliminado".center(175, "*"))
+            write_to_record(user, book_to_erase)
+        else:
+            print("\n"+" No se ha encontrado NINGÚN RESULTADO ".center(190,"*")+"\n")
         print(DB)
+        
 
     elif user == "q":
         user = input("Desea guardar los datos (Y/N)? ")
         if user.lower() == "y":
             export_csv(DB,"books.csv")
-                
-            user = "q"
-
+        print(" Thanks! Good bye! ".center(175, "-"))
+        user = "q"        
 user = "0"
+            
+        
+            
