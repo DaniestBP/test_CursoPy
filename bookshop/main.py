@@ -1,6 +1,7 @@
 from bookshop import *
 
 
+
 # with open(f"{cwd}/errors.log", mode="a") as file:
 #     file.write("Error 1: Missing User ID")
 
@@ -60,17 +61,19 @@ while user != "q":
     elif user == "4":
         for i, genre in enumerate(genres):
             print(f"{i + 1}. {genre}")
-
         user = int(input("Género Nº: ")) -1
         user = genres[user]
         books = get_by_term ("genre", user)
-       
+
+        if len(books):
+            write_to_record(user, [f'Se ha buscado {book["genre"]}: {book["author"]} - {book["title"]}\n' for book in books]) 
+
         for i, book in enumerate(books):
             pretty_book(book)
             print("-"*50)
             if i % 2 == 0:
                 input("Siguiente: ")
-                write_to_record(user, book)    
+                   
         input()
                 
 

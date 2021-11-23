@@ -38,7 +38,7 @@ DB = [{
     "genre": "Divulgación científica"
 },
 {
-    "id": "ne_1",
+    "id": "ne_2",
     "title": "El corazón de las tinieblas",
     "author": "Joseph Conrad",
     "genre": "Narrativa extranjera"
@@ -50,15 +50,15 @@ DB = [{
     "genre": "Divulgación científica"
 },
 {
-    "id": "dc_5",
+    "id": "ne_5",
     "title": "Sidharta",
     "author": "Hermann Hesse",
     "genre": "Narrativa extranjera"
 },
 {
     "id": "el_1",
-    "title": "Andres Trapiello",
-    "author": "Las armas y las letras",
+    "title": "Las Armas y las Letras",
+    "author": "Andres Trapiello",
     "genre": "Narrativa extranjera"
 },
 {
@@ -69,40 +69,14 @@ DB = [{
 },
 ]
 
-# DB = []
-
 genres = ["Narrativa extranjera", "Divulgación científica", "Narrativa policíaca", "Ciencia ficción", "Autoayuda"]
+
+# DB = []
 
 user = "0"
 
 
-def read_csv(dataset, file_name):
-    with open(file_name, mode="r", enconding ="utf8")as file:
-        csv_reader= csv.reader(file, delimiter=";")
-        next(csv_reader)
-        for row in csv_reader:
-            new_dict = {
-                "id" : row[1],
-                "author": row[0],
-                "title": row[1],
-                "genre": row[2]
-            }
-            DB.append(new_dict)
-
-# read_csv(DB, "books.csv")
     
-
-
-def export_csv(dataset, file_name):
-    with open(file_name, mode="w", newline="", encoding="utf8")as file:
-        csv_writer= csv.writer(file, delimiter = ";")
-        csv_writer.writerow(["id", "title", "author", "genre"])
-        for entry in dataset:
-           csv_writer.writerow(entry.values())
-
-
-
-
 
 def menu():
     print("\n" + "BIENVENIDO A LIBRERIA FANTASIA".center(190, "-")+"\n")
@@ -174,27 +148,29 @@ def write_to_record(search_term, to_write):
             file.writelines(to_write)
             
 
+def read_csv(dataset, file_name):
+    with open(file_name, mode="r", enconding ="utf8")as file:
+        csv_reader= csv.reader(file, delimiter=";")
+        next(csv_reader)
+        for row in csv_reader:
+            new_dict = {
+                "id" : row[0],
+                "title": row[1],
+                "author": row[2],
+                "genre": row[3]
+            }
+            DB.append(new_dict)
+
+# read_csv(DB, "books.csv")
 
 
-# while user != "q":
-#     menu()
 
-#     user = input(": ")
-#     if user == "1":
-#         user = input("Escriba el ID: ")
-#         books = get_by_term ("id", user)
-#         if len(books):
-#             for book in books:
-#                 pretty_book(book)
-#         else:
-#             print("No se ha encontrado NINGÚN RESULTADO")
-    
-#     elif user == "2":
-#         user = input("Escriba el Titulo:  ")
-#         books = get_by_term ("title", user)
-#         if len(books):
-#             for book in books:
-#                 pretty_book(book)
-#         else:
-#             print("No se ha encontrado NINGÚN RESULTADO")
+def export_csv(dataset, file_name):
+    with open(file_name, mode="w", newline="", encoding="utf8")as file:
+        csv_writer= csv.writer(file, delimiter = ";")
+        csv_writer.writerow(["id", "title", "author", "genre"])
+        for entry in dataset:
+           csv_writer.writerow(entry.values())
+
+
 

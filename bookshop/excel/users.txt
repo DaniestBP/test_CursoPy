@@ -1,3 +1,5 @@
-id, f_name, l_name
-001, Vito, Genovese
-002, Arancha, Carpintero
+
+a =[1,2,3,4]
+for num in enumerate a:
+    print(num)
+
