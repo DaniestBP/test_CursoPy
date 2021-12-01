@@ -80,7 +80,7 @@ user = "0"
 
 def menu():
     print("\n" + "BIENVENIDO A LIBRERIA FANTASIA".center(190, "-")+"\n")
-    print("\n" + "Busque su libro".center(130)+"\n"+"\n")
+    print("\n" + "Busque su libro".center(130)+"\n"*2)
     print("1. Id: " + (" "* (149 - len("1. Id: "))) + "#"+"\n")
     print("2. Title: " + (" "* (149 - len("2. Title: "))) + "#"+"\n")
     print("3. Author: " + (" "* (149 - len("3. Author: "))) + "#"+"\n")

@@ -1,46 +1,11 @@
 import requests as req
 import json
+from funcs import *
 
 # location = input("Ciudad: ")
 
 # woeid = res[0]["woeid"]
 # res = req.get(f"https://www.metaweather.com/api/location/{woeid}").json()
-
-def menu():
-    print("\n" + " BRILLIANT WEATHER".center(185, "*")+ "\n")
-    print(" >  Por favor elija el lugar donde desea consultar el tiempo  <".center(150)+ "\n")
-    print(" 1. Buscar por ciudad: " + (" "*(180 - len("2. Buscar por coordenadas: "))) + "#")
-    print(" 2. Buscar por coordenadas: " + (" "*(175 - len("2. Buscar por coordenadas: "))) + "#")
-    print(" 3. ciudad/coordenadas en fecha: " + (" "*(165 -len("3. ciudad/coordenadas en fecha: "))) + "#"+ "\n")
-    print(" Para salir (Q): " + (" " * (180 - len("Para salir (Q): ")) + "#")+ "\n")
-
-
-
-def forecast(location, coordinates=False, date=False):
-
-    if coordinates:
-        woeid = req.get(f"https://www.metaweather.com/api/location/search/?lattlong={location}").json()[0]["woeid"]
-        forecast = req.get(f"https://www.metaweather.com/api/location/{woeid}/").json()["consolidated_weather"][0]
-    else:
-        woeid = req.get(f"https://www.metaweather.com/api/location/search/?query={location}").json()[0]["woeid"]
-        forecast = req.get(f"https://www.metaweather.com/api/location/{woeid}/").json()["consolidated_weather"][0]
-    forecast = {
-        "desc": forecast["weather_state_name"],
-        "max-temp": forecast["max_temp"],
-        "min_temp": forecast["min_temp"],
-        "st": forecast["the_temp"],
-        "humidity": forecast["humidity"],
-        "wind_speed": forecast["wind_speed"],
-        "wind_direction": forecast["wind_direction"]
-    }
-    return forecast
-
-
-
-def pretty_print(forecast):
-    for k, v in forecast.items():
-        print(f"{k.upper()}: {v}")
-
 
 user = ""
 
@@ -49,21 +14,45 @@ while user != "q":
     user = input("\n" +" Haga su elección ahora: ")
     if user == "1":
         city = input("Ciudad: ")
-        forecast_search = forecast(city)
-        print(f"La sensación térmica para {city}:")
-        pretty_print(forecast_search)
+        forecast_search = forecast_v2(city)
+        if forecast_search:
+            print(f"La sensación térmica para {city}:")
+            pretty_print(forecast_search)
+        else:
+            print("No hay pronóstico disponible para la localización: {city}")
         input("...")
+
     elif user =="2":
         lattlong = input("Coordenadas: ")
-        forecast_search = forecast(lattlong, coordinates = True)
+        forecast_search = forecast_v2(lattlong, coordinates = True)
         print(f"El tiempo para las coordenadas {lattlong}, es:")
         pretty_print(forecast_search)
         input("...")
+    
+    # elif user == "3":
+    #     lattlong = input("Coordenadas: ")
+    #     date = input("Fecha: ")
+    #     forecast_coords_date = forecast_v2(lattlong, date=True)
+    #     if forecast_coords_date:
+    #         print(f"El tiempo para las coordenadas {lattlong} en la fecha {date}, es:")
+    #         pretty_print(forecast_coords_date)
+    #     else:
+    #         print("No hay pronóstico disponible")
 
-        
+    #     input("...")
 
+    elif user == "4":
+        A = input("Desde: ")
+        B = input("Hasta: ")
+        trip_prediction = calculate_trip(A, B)
+        if trip_prediction:
+            if trip_prediction["is_bad_weather"]:
+                print("Alerta de mal tiempo")
+        print(f"Temperatura en {A}: {round(trip_prediction['A_forecast']['the_temp'],2)}")
+        print(f"Temperatura en {B}: {round(trip_prediction['B_forecast']['the_temp'],2)}")
 
+        print(f"Distancia:{round(trip_prediction['distance'])}")
+        print(f"Tiempo estimado:{round(trip_prediction['time'])}")
 
-
-
+        input("...")
 
