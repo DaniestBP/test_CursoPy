@@ -56,6 +56,7 @@ def ley_bendford(dataset):
     for k, v in result.items():
         print(f"{k}: {v}")
     
+'''
 
 with open("data.csv", mode = "r", encoding= "utf8")as file:
     data = list(csv.reader(file, delimiter=";"))[1:] 
@@ -99,27 +100,29 @@ with open("data.csv", mode = "r", encoding= "utf8")as file:
 # ********Ejercicio 7.
     ley_bendford(data)
     
+'''
+
+with open("data.csv", mode = "r", encoding= "utf8")as file:
+    data = list(csv.reader(file, delimiter=";"))
 
 
-with open("./data.json", mode = "w", newline="", encoding= "utf8")as file:
-    json.dump(data, file)
-    # file.write(str(data))
+def to_json(dataset):
+    result = {"muns":[]}
+    dict_keys = dataset[0]
+    for mun in dataset[1:]:
+        pre_dict= {}
+        for i, k in enumerate(dict_keys):
+            if i == 5 or i == 6:  # convertimos los indices 5 y 6 (Superficie y densidad) a float porque los teníamos en una String originalmente.
+                pre_dict[k] = float(mun[i])
+            else:
+                pre_dict[k] = mun[i]
+                
+        result["muns"].append(pre_dict)
+    return result
 
-# def to_json(dataset):
 
-#     result={"muns":[]}
-#     dict_keys = dataset[0]
 
-#     for mun in dataset[1:]:
-#         pre_dict = {}
-#         for i, key in enumerate(dict_keys):
-#             if i == 5 or i == 6 :
-
-#                 pre_dict(key) == mun[i]
-#         result["muns"].append(pre_dict)    
-#     return result
-
-# with open("./muns.json", mode="w", enconding="utf")as file:
-#     data_json = to_json(data)
-#     print(len(data_json))
-#     json.dump(data_json, file, indent=4)
+with open("data.json", mode = "w", encoding= "utf8")as file:
+    data_to_json = to_json(data)
+    json.dump(data_to_json, file, indent=4, ensure_ascii=False)
+    

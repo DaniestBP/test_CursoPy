@@ -42,5 +42,38 @@ students = [
     {"name": "Jose", "age": "16"}
 ]
 
-by_age = sorted(students, reverse=True, key=lambda student: student["age"])
-print((by_age[0]["name"], by_age[0]["age"]))
+by_age = sorted(students, reverse=False, key=lambda student: student["age"])
+# print((by_age[0]["name"], by_age[0]["age"]))
+
+
+
+##############################################  GENERATORS #########################################
+
+
+a = [1,2,3,4]
+
+def squares(dataset):
+    for num in dataset:
+        yield num **2
+
+'''# Funcion que genera iterando solo hasta cuando se necesita. /// yield en lugar de return // Las funciones generadoras son ITERABLES (se pueden generar) y son ITERATORS. 
+# Y son funciones que trabajaran dentro de otras funciones  '''
+
+b = squares(a)
+# print(next(c_g))
+# print(next(c_g))
+# print(next(c_g))
+# print(next(c_g))
+# print(next(c_g))
+
+''' Cuando no haya más valores sobre los que iterar dara un error deStopIterationError'''
+
+c_g = (num ** 2 for num in a) # Si colocamos parentesis en lugar de corchetes la espresión se vuelve generadora
+c_cl = [num ** 2 for num in a]
+print(c_g)
+print(c_cl)
+for num in c_g:
+    print(num)
+
+
+

@@ -8,6 +8,7 @@ def menu():
     print(" 1. Buscar por ciudad: " + (" "*(180 - len("2. Buscar por coordenadas: "))) + "\n")
     print(" 2. Buscar por coordenadas: " + (" "*(175 - len("2. Buscar por coordenadas: "))) +"\n")
     print(" 3. ciudad/coordenadas en fecha: " + (" "*(165 -len("3. ciudad/coordenadas en fecha: "))) + "\n")
+    print(" 4. Planea tu viaje: " + (" "*(165 -len("3. ciudad/coordenadas en fecha: "))) + "\n")
     print(" Para salir (Q): " + (" " * (180 - len("Para salir (Q): ")))+ "\n")
 
 
@@ -43,7 +44,7 @@ def get_woeid(location, **kwargs):
         if len(woeid)>= 1:
             for loc in woeid:
                 woeids[loc["title"].lower()]= loc["woeid"]
-            write_data(woeids, "woeids.json")
+                write_data(woeids, "woeids.json")
             if limit:
                 return [dic["woeid"] for dic in woeid[0:limit]]
             else:

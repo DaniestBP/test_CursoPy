@@ -49,17 +49,11 @@ while user != "q":
             random_country = random.choice(countries)
             print(random_country["name"]["common"])
             for random_country in countries:
+                pass
                 # quizz = [
                 #      "Cuál es la capital de {random_country}?",
                 #      "Cuál es el idioma de {random_country}?",
                 #      "Qué población tiene {random_country}?"
                 # ]
                 # print(quizz)
-                
-
-       
-
-            
-
-        
-
+    
