@@ -1,6 +1,7 @@
 import requests as req
 import csv
 import json
+# from os import system
 
 # Direccion url de basa de datos en formato .csv ((NORMALEMENTE TRABAJAREMOS EN SOBRE FORMATOS .json))
 
@@ -56,51 +57,81 @@ def ley_bendford(dataset):
     for k, v in result.items():
         print(f"{k}: {v}")
     
-'''
+
+def menu():
+    print("\n"*5 + " Bienvenido a la base de datos de los Municipios de la CAM ".center(150, "*")+ "\n")
+    print("1. Buscar por INE del Municipio: " + (" " * (150 - len("1. Buscar por INE del Municipio: "))) + "#" + "\n")
+    print("2. Cuál es el Municipio más grande de la CAM?"+ (" " * (150 - len("2. Cuál es el Municipio más grande de la CAM?"))) + "#" + "\n")
+    print("3. Sepa cuál es la Superficie de la CAM"+ (" " *(150 - len("3. Sepa cuál es la Superficie de la CAM"))) + "#" + "\n")
+    print("4. Sepa la densidad de población de la CAM"+ (" " *(150 - len("4. Sepa la densidad de población de la CAM"))) + "#" + "\n")
+    print("5. Población total de la CAM"+ (" " *(150 - len("5. Población total de la CAM"))) + "#" + "\n")
+    print("6. Sepa la población media por Municipio de la CAM"+ (" " *(150 - len("6. Sepa la población media por Municipio de la CAM"))) + "#" + "\n")
+    print("7. Cómo aplica la Ley de Bendford en la CAM"+ (" " * (150 - len("7. Cómo aplica la Ley de Bendford en la CAM"))) + "#" + "\n")
+    print("Q. Pulsa Q para salir" + (" " * (150 - len("Q. Pulsa Q para salir"))) + "#" + "\n")
+
 
 with open("data.csv", mode = "r", encoding= "utf8")as file:
-    data = list(csv.reader(file, delimiter=";"))[1:] 
-    # next(data)
-    # for element in data:
-    #     data.append(element) 
-    # print(data[1])
+    data = list(csv.reader(file, delimiter=";"))[1:]
+
+
+
+user = ""
+
+while user != "q":
+    menu()
+    user = input(": ")
+    if user == "1":
+        
+        ine_code_chosen = input("Introduzca el INE: "+ "\n"*2)
+        mun_found = get_by_ine(data, ine_code_chosen)
+        if mun_found:
+            print("\n", f" Has escogido el Municipio {mun_found[1]} con un área de {mun_found[-2]} km2 y una densidad de {mun_found[-1]} personas/km2 ".center(100,"-"))   
+        else:
+            print("No se ha encontrado el Municipio")
+        input("...")
+        
+
+    elif user == "2":
+        largest_mun = get_largest(data)
+        print("\n", f" El Municipio más grande es {largest_mun[1]}con un área de {largest_mun[-2]} km2 ".center(100,"-"))
+ 
     
-# ********Ejercicio 1.>> BUSCAR POR CODIGO INE:******   
-
-    ine_code_chosen = input("Introduzca el INE a buscar: ")
-    mun_found = get_by_ine(data, ine_code_chosen)
-    if mun_found:
-        print(f"Los datos para el Municipio escogido son {mun_found[1]} con un area de {mun_found[-2]} km2 y una densidad de {mun_found[-1]} personas/km2")   
-    else:
-        print("No se ha encontrado el Municipio")
-
-# ********Ejercicio 2.>> LOCALIZAR EL MUNICIPIO MAS GRANDE****** 
-
-    largest_mun = get_largest(data)
-    print(f"El Municipio mas grande es {largest_mun[1]}con un area de {largest_mun[-2]} km2")
-
-# ********Ejercicio 3.>> ****** 
-
-    total_area = sup_total(data)
-    print(f"La Superficie total de la CAM es {total_area} km2")
-
-# ********Ejercicio 4.
-    densidad_total_area= densidad_total(data)
-    print(f"En la CAM viven {densidad_total_area} personas por km2")
-
-# ********Ejercicio 5.
-    poblacion_total =  pob_total(data)
-    print(f"La poblacion total de la CAM es {poblacion_total}")
-
-# ********Ejercicio 6.
-    pob_media = poblacion_total / len(data)
-    print(f"La población media de la CAM es de {round(pob_media)} personas por Municipio")
-
-
-# ********Ejercicio 7.
-    ley_bendford(data)
+    elif user == "3":
+        total_area = sup_total(data)
+        print("\n", f" La Superficie total de la CAM es {total_area} km2 ".center(100,"-"))
+   
+    elif user == "4":
+        densidad_total_area= densidad_total(data)
+        print("\n", f" En la CAM viven {densidad_total_area} personas por km2 ".center(100, "-"))
     
-'''
+    elif user == "5":
+        poblacion_total =  pob_total(data)
+        print("\n", f" La población total de la CAM es {poblacion_total} ".center(100, "-"))
+   
+    elif user == "6":
+        pob_media = pob_total(data) / len(data)
+        print("\n", f" La población media de la CAM es de {round(pob_media)} personas por Municipio ".center(100, "-"))
+
+    elif user == "7":
+        ley_bendford(data)
+
+    elif user == "q":
+        print("\n" *2, " Gracias por visitarnos ".center(155, "*"))
+        user = "q"
+    
+user = "0"
+# system("cls")
+
+
+
+
+
+
+# CONVERT .CSV TO .JSON >>>>
+
+
+    
+"""
 
 with open("data.csv", mode = "r", encoding= "utf8")as file:
     data = list(csv.reader(file, delimiter=";"))
@@ -125,4 +156,5 @@ def to_json(dataset):
 with open("data.json", mode = "w", encoding= "utf8")as file:
     data_to_json = to_json(data)
     json.dump(data_to_json, file, indent=4, ensure_ascii=False)
-    
+
+"""
