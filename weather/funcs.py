@@ -27,8 +27,8 @@ def write_data(data, json_file):
     with open (json_file, mode="w", encoding="utf8") as file:
         json.dump(data, file, ensure_ascii=False, indent=4)
 
-woeids = get_data("woeids.json")
 
+woeids = get_data("woeids.json")
 
 def get_woeid(location, **kwargs):
     term = "query"
@@ -71,6 +71,7 @@ def get_forecast(location, **kwargs):
 
 def calculate_trip(A,B):
     A_woeid = get_woeid(A)
+    # B_woeid = get_woeid(B)
     B_woeid, B_distance = None, None
     if A_woeid:
         A_woeid = A_woeid[0]
@@ -80,7 +81,7 @@ def calculate_trip(A,B):
         for des in des_list[1:]:
             if des["title"].lower() == B.lower():
                 B_woeid, B_distance = des["woeid"], des["distance"]
-                print(B_distance, B_woeid)
+                
         if B_woeid:
             A_forecast, B_forecast = get_forecast(A)["consolidated_weather"][0], get_forecast(B)["consolidated_weather"][0]
             if A_forecast["weather_state_abbr"] in ("sn", "sl", "h", "t", "hr") or B_forecast["weather_state_abbr"] in ("sn", "sl", "h", "t", "hr"):
@@ -104,20 +105,22 @@ def calculate_trip(A,B):
             return result
      
 
+
 def forecast_v2(location, **kwargs):
     
     term = "query"
     woeid = woeids.get(location)
-    
+
     if not woeid:
+        
         if kwargs.get("coords"):
             term = "lattlong"
-        print(f"term: {term}")
         url = f"https://www.metaweather.com/api/location/search/?{term}={location}"
         woeid = req.get(url).json()
+           
         
         if len(woeid)>= 1:
-            for loc in woeids:
+            for loc in woeid:
                 woeids[loc["title"].lower()]= loc["woeid"]
             woeid = woeid[0]["woeid"]
             write_data(woeids, "woeids.json")
@@ -125,23 +128,25 @@ def forecast_v2(location, **kwargs):
         else:
             print("return none se ha ejecutado")
             return None  
-        
+   
     # A partir de aqui podemos buscar por "woeid":
     """
     generar la url de llamada en base al woeid obtenido en el codigo anterior --> url = "weather..."
     """
     url = f"https://www.metaweather.com/api/location/{woeid}/"
     date = kwargs.get("date")
+    
     if date:
         url += date
     print(url)
     forecast = req.get(url).json()
+     
     if type(forecast) == list:
         forecast = forecast[0]
         if not len(forecast):
             return None
     forecast = forecast["consolidated_weather"][0]
-               
+    # print(forecast)               
     forecast = {
         "desc": forecast["weather_state_name"],
         "max-temp": forecast["max_temp"],
@@ -152,13 +157,17 @@ def forecast_v2(location, **kwargs):
         "wind_direction": forecast["wind_direction"]
     }
     return forecast
+        
+           
+# print(forecast_v2("48.856930,2.341200"))
+
+
+# print(get_forecast("lisbon", date = "2020/10/10"))
 
 
 
 
+# forecast_v2("21.304850,-157.857758")
 
 
-
-
-
-
+    
