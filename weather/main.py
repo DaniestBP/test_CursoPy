@@ -1,5 +1,5 @@
-import requests as req
-import json
+# import requests as req
+# import json
 from funcs import *
 
 # location = input("Ciudad: ")
@@ -22,24 +22,26 @@ while user != "q":
             print("No hay pronóstico disponible para la localización: {city}")
         input("...")
 
-    elif user =="2":
-        lattlong = input("Coordenadas: ")
-        forecast_search = forecast_v2(lattlong, coordinates = True)
+    elif user == "2":
+        lattlong = input("Coordenadas(latt, long): ")
+        forecast_search = forecast_v2(lattlong, coords = True)
         print(f"El tiempo para las coordenadas {lattlong}, es:")
         pretty_print(forecast_search)
         input("...")
-    
-    # elif user == "3":
-    #     lattlong = input("Coordenadas: ")
-    #     date = input("Fecha: ")
-    #     forecast_coords_date = forecast_v2(lattlong, date=True)
-    #     if forecast_coords_date:
-    #         print(f"El tiempo para las coordenadas {lattlong} en la fecha {date}, es:")
-    #         pretty_print(forecast_coords_date)
-    #     else:
-    #         print("No hay pronóstico disponible")
+        
+        
+    elif user == "3":
+        
+        lattlong = input("Coordenadas: ")
+        date = input("Fecha ( year/month/day): ")
+        forecast_coords_date = forecast_v2(lattlong, date = True)
+        # if forecast_coords_date:
+        print(f"El tiempo para las coordenadas {lattlong} en la fecha {date}, es:")
+        pretty_print(forecast_coords_date)
+        # else:
+        #     print("No hay pronóstico disponible")
 
-    #     input("...")
+        input("...")
 
     elif user == "4":
         A = input("Desde: ")
@@ -48,11 +50,11 @@ while user != "q":
         if trip_prediction:
             if trip_prediction["is_bad_weather"]:
                 print("Alerta de mal tiempo")
-        print(f"Temperatura en {A}: {round(trip_prediction['A_forecast']['the_temp'],2)}")
-        print(f"Temperatura en {B}: {round(trip_prediction['B_forecast']['the_temp'],2)}")
+        print(f"Temperatura en {A}: {round(trip_prediction['A_forecast']['the_temp'],2)} grados")
+        print(f"Temperatura en {B}: {round(trip_prediction['B_forecast']['the_temp'],2)} grados")
 
-        print(f"Distancia:{round(trip_prediction['distance'])}")
-        print(f"Tiempo estimado:{round(trip_prediction['time'])}")
+        print(f"Distancia:{round(trip_prediction['distance'])} km")
+        print(f"Tiempo estimado:{round(trip_prediction['time'])} horas")
 
         input("...")
 
