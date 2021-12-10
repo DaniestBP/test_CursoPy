@@ -37,7 +37,7 @@ def get_woeid(location, **kwargs):
     if not woeid:
         if kwargs.get("coords"):
             term = "lattlong"
-        print(f"term: {term}")
+        # print(f"term: {term}")
         url = f"https://www.metaweather.com/api/location/search/?{term}={location}"
         woeid = req.get(url).json()
         

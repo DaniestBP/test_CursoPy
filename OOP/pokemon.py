@@ -3,7 +3,10 @@ import random
 import time
 from os import system
 
-species = ["fire","water", "grass"]
+species_fire = {"weaknesses": ["water", "ground"]}
+species_water = {"weaknesses": ["grass", "ground"]}
+species_grass = {"weaknesses": "fire"}
+species = [species_fire,species_water, species_grass]
 
 class Pokemon:
 
@@ -30,7 +33,13 @@ class Pokemon:
         self.attacks.append(attack)
     
     def receive_damage(self, attack):
-        self.HP -= attack.damage
+        if attack.species in self.species["weaknesses"]:
+            True
+
+        self.species, attack.species
+        is_weakness = True
+        weakness = True if is_weakness else False
+        self.HP -= attack.damage * 1.5 if weakness else attack.damage
         if self.HP <= 0:
             self.is_alive = False
             print("\n"*2, "TU POKEMON HA VUELTO A SU POKE-BOLA".center(85))
@@ -108,7 +117,7 @@ while user != "q":
     Rino.receive_damage(Charmander_attack)
     if Charmander.is_alive == False:
         print("\n"* 2, "GAME OVER")
-        input(f"Pulsa Q para salir: ")
+    
 
-    # system("cls")
-user = "q"
+    # system("clear")
+    
