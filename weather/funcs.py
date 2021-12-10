@@ -117,7 +117,8 @@ def calculate_trip(A,B):
                 B_woeid, B_distance = des["woeid"], des["distance"]
                 
         if B_woeid:
-            A_forecast, B_forecast = get_forecast(A)["consolidated_weather"][0], get_forecast(B)["consolidated_weather"][0]
+            # get forecast devulve un lista de lo que hay en consolidated_weather
+            A_forecast, B_forecast = get_forecast(A)[0], get_forecast(B)[0]
             if A_forecast["weather_state_abbr"] in ("sn", "sl", "h", "t", "hr") or B_forecast["weather_state_abbr"] in ("sn", "sl", "h", "t", "hr"):
                 is_bad_weather = True
             else:
