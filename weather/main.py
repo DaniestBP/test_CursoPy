@@ -1,6 +1,11 @@
+#!/usr/bin/env python3
+# code: utf-8
+# Había un problema de encoding segun la documentación es posible solucionarlo así
+
 # import requests as req
 # import json
 from funcs import *
+
 
 # location = input("Ciudad: ")
 
@@ -11,39 +16,50 @@ user = ""
 
 while user != "q":
     menu()
-    user = input("\n" +" Haga su elección ahora: ")
+    user = input("\n" + " Haga su elección ahora: ")
     if user == "1":
         city = input("Ciudad: ")
-        forecast_search = forecast_v2(city)
+        # sin forecast_v2 implenentada
+        forecast_search = get_forecast(city)
         if forecast_search:
             print(f"La sensación térmica para {city}:")
-            pretty_print(forecast_search)
+            # si devolvemos mas de una predicción (linea 74 de funcs.py) si no es asi debemos prescindir del for
+            for predict in forecast_search:
+                pretty_print(predict)
         else:
-            print("No hay pronóstico disponible para la localización: {city}")
+            print(f"No hay pronóstico disponible para la localización: {city}")
         input("...")
 
     elif user == "2":
         lattlong = input("Coordenadas(latt, long): ")
-        forecast_search = forecast_v2(lattlong, coords = True)
+        # sin forecast_v2 implenentada
+        forecast_search = get_forecast(lattlong, coords = True)
         print(f"El tiempo para las coordenadas {lattlong}, es:")
-        pretty_print(forecast_search)
+        if forecast_search:
+            for predict in forecast_search:
+                    pretty_print(predict)
+        else:
+            print(f"No hay pronóstico disponible para las coordenadas: {lattlong}")
         input("...")
         
         
     elif user == "3":
-        
+        # Habria que hacerlo para busqueda por ciudad o coordenadas
         lattlong = input("Coordenadas: ")
         date = input("Fecha ( year/month/day): ")
-        forecast_coords_date = forecast_v2(lattlong, date = True)
-        # if forecast_coords_date:
-        print(f"El tiempo para las coordenadas {lattlong} en la fecha {date}, es:")
-        pretty_print(forecast_coords_date)
-        # else:
-        #     print("No hay pronóstico disponible")
-
+        # Para city sin coords=
+        # date en la funcion get_forecast no es boolean es el valor suministrado por el input
+        forecast_coords_date = get_forecast(lattlong, coords=True, date=date)
+        if forecast_coords_date:
+            print(f"El tiempo para las coordenadas {lattlong} en la fecha {date}, es:")
+            for predict in forecast_coords_date:
+                    pretty_print(predict)
+        else:
+            print(f"No hay pronóstico disponible para las coordenadas({lattlong}) en fecha {date}")
         input("...")
 
     elif user == "4":
+        # La funcion calculate_trip tiene buena pinta, no la he podido revisar
         A = input("Desde: ")
         B = input("Hasta: ")
         trip_prediction = calculate_trip(A, B)
@@ -57,4 +73,3 @@ while user != "q":
         print(f"Tiempo estimado:{round(trip_prediction['time'])} horas")
 
         input("...")
-
