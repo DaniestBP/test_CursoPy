@@ -33,13 +33,13 @@ class Pokemon:
         self.attacks.append(attack)
     
     def receive_damage(self, attack):
-        if attack.species in self.species["weaknesses"]:
+        if self.species["weaknesses"] in attack.species:
+            is_weakness = True
+            weakness = True if is_weakness else False
+            self.HP -= attack.damage * 1.5 if weakness else attack.damage
             True
 
         self.species, attack.species
-        is_weakness = True
-        weakness = True if is_weakness else False
-        self.HP -= attack.damage * 1.5 if weakness else attack.damage
         if self.HP <= 0:
             self.is_alive = False
             print("\n"*2, "TU POKEMON HA VUELTO A SU POKE-BOLA".center(85))
@@ -90,7 +90,7 @@ Charmander.learn_attack(CharmaPunch)
 
 # Charmander.receive_damage(Rino.attacks[0])  
 
-
+print(type(Rino.attacks))
 # v1.0 exp_rate = 1 
 # print(Pokemon.xp_rate)
 

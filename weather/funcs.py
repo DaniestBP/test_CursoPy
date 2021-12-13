@@ -1,6 +1,8 @@
 import requests as req
 import json
-import time 
+import time
+
+from requests.api import get 
 
 def menu():
     print("\n" + " BRILLIANT WEATHER".center(155, "*")+ "\n")
@@ -45,7 +47,7 @@ def get_woeid(location, **kwargs):
         woeid = req.get(url)
         
         # si el request es correcto woeid.status_code == 200
-        if woeid.ok:
+        if woeid:
             woeid = woeid.json()
             # woeid no esta vacio
             if woeid:
@@ -65,49 +67,50 @@ def get_woeid(location, **kwargs):
 
 def get_forecast(location, **kwargs):
     woeid = get_woeid(location, **kwargs)
+
     if woeid:
         woeid = woeid[0]
-
         url = f"https://www.metaweather.com/api/location/{woeid}/" 
+           
         date = kwargs.get("date")
         if date:
-            # faltaba el separador
             url += date
-        forecast = req.get(url)
-        # si el request es correcto forecast.status_code == 200
-        if forecast.ok:
+                     
+        forecast = req.get(url)  # si el request es correcto forecast.status_code == 200
+        
+        if forecast:
             forecast = forecast.json()
             if forecast:
                 # con date se devuelve ya una lista solo de forecasts
                 if not date:
                     forecast = forecast["consolidated_weather"]
-                     
-                return forecast[:3]
-                # Creo que habia que devolver tres predicciones asi que devuelvo las tres primeras
-                # Debias reducirlas un poco tipo:
-                # fore_reduc = []
-                # for predict in forecast:
-                #     fore_reduc.append({
-                #         "date": forecast["applicable_date"],  
-                #         "desc": forecast["weather_state_name"],
-                #         "max-temp": forecast["max_temp"],
-                #         "min_temp": forecast["min_temp"],
-                #         "st": forecast["the_temp"],
-                #         "humidity": forecast["humidity"],
-                #         "wind_speed": forecast["wind_speed"],
-                #         "wind_direction": forecast["wind_direction"]
-                #     })
-                #
-                # return fore_reduc
-
+                # Devuelvo las tres primeras predicciones
+                fore_reduc = []
+                    
+                for predict in forecast[:3]:
+                    fore_reduc.append({
+                        "date": predict["applicable_date"],  
+                        "desc": predict["weather_state_name"],
+                        "abbr": predict["weather_state_abbr"],
+                        "max-temp": predict["max_temp"],
+                        "min_temp": predict["min_temp"],
+                        "st": predict["the_temp"],
+                        "humidity": predict["humidity"],
+                        "wind_speed": predict["wind_speed"],
+                        "wind_direction": predict["wind_direction"]
+                    })
+                return fore_reduc
+                
+    return []
     # si hubo algun problema con la request, si forecast estaba vacio
     # o si el woeid estaba vacio, devolvemos una lista vacia
-    return []
+
+
 
 def calculate_trip(A,B):
     A_woeid = get_woeid(A)
-    B_woeid = get_woeid(B)
     B_woeid, B_distance = None, None
+    
     if A_woeid:
         A_woeid = A_woeid[0]
         A_coords = req.get(f"https://www.metaweather.com/api/location/{A_woeid}/").json()["latt_long"]
@@ -120,7 +123,7 @@ def calculate_trip(A,B):
         if B_woeid:
             # get forecast devulve un lista de lo que hay en consolidated_weather
             A_forecast, B_forecast = get_forecast(A)[0], get_forecast(B)[0]
-            if A_forecast["weather_state_abbr"] in ("sn", "sl", "h", "t", "hr") or B_forecast["weather_state_abbr"] in ("sn", "sl", "h", "t", "hr"):
+            if A_forecast["abbr"] in ("sn", "sl", "h", "t", "hr") or B_forecast["abbr"] in ("sn", "sl", "h", "t", "hr"):
                 is_bad_weather = True
             else:
                 is_bad_weather = False
@@ -139,7 +142,8 @@ def calculate_trip(A,B):
             else:
                 result["time"] = result["distance"] / 100
             return result
-     
+    return None
+
 
 
 

@@ -82,7 +82,7 @@
     "mesa": 2449808,
     "manchester": 2444674,
     "boston": 2367105,
-    "portland": 2475688,
+    "portland": 2475687,
     "providence": 2477058,
     "burlington": 2372071,
     "bridgeport": 2368947,
@@ -123,5 +123,17 @@
     "st ives": 35662,
     "geneva": 782538,
     "torino": 725003,
-    "zurich": 784794
+    "zurich": 784794,
+    "dublin": 560743,
+    "calvi": 582723,
+    "anchorage": 2354490,
+    "reykjavík": 980389,
+    "oslo": 862592,
+    "edmonton": 8676,
+    "kirkwall": 25462,
+    "gothenburg": 890869,
+    "calgary": 8775,
+    "sapporo": 1118108,
+    "vancouver": 9807,
+    "seattle": 2490383
 }

@@ -61,13 +61,16 @@ while user != "q":
         A = input("Desde: ")
         B = input("Hasta: ")
         trip_prediction = calculate_trip(A, B)
+
         if trip_prediction:
             if trip_prediction["is_bad_weather"]:
-                print("Alerta de mal tiempo")
-        print(f"Temperatura en {A}: {round(trip_prediction['A_forecast']['the_temp'],2)} grados")
-        print(f"Temperatura en {B}: {round(trip_prediction['B_forecast']['the_temp'],2)} grados")
+                print("\n"+"¡"*10 +"Alerta de mal tiempo".center(60 - len("Alerta de mal tiempo"))+"!"*10)
 
-        print(f"Distancia:{round(trip_prediction['distance'])} km")
-        print(f"Tiempo estimado:{round(trip_prediction['time'])} horas")
-
-        input("...")
+            print(f"Temperatura en {A}: {round(trip_prediction['A_forecast']['st'],2)} grados")
+            print(f"Temperatura en {B}: {round(trip_prediction['B_forecast']['st'],2)} grados")
+            print(f"Distancia:{round(trip_prediction['distance'])} km")
+            print(f"Tiempo estimado:{round(trip_prediction['time'])} horas")
+            input("...")
+        else:
+            print("No tenemos rutas para estas ciudades")
+                
