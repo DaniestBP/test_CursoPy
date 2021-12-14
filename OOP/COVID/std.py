@@ -55,8 +55,8 @@ class Std:
         return tuple(self.y_prediction(week) for week in self.x)
 
     def y_prediction(self, x_value):
-        
         return self.B * x_value + self.B0
+        
         
         
     def __str__(self):

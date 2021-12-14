@@ -45,7 +45,7 @@ analyze = Std(x,y)
 #     B = std_object.B
 #     result = [B]
 #     for _ in range(1, len(std_object.y)):
-#         result.append(B + result[-1])
+#         result.apgiopend(B + result[-1])
 
 # o
 
@@ -54,14 +54,22 @@ analyze = Std(x,y)
 #     for week in std_object.x:
 #         result.append(std_object.y_prediction(week))
 #     return result
-    # return [std_object.y_prediction(week + 3) for week in std_object.x]
+
+def predic_last_Dec(std_object):
+    #como sabemos que es 07/dec sabemos que hasta el 31/dec son 24 dias
+    last_of_dec = 24/7
+    predict_last_dec = std_object.n + last_of_dec
+    prediction = std_object.y_prediction(predict_last_dec)
+    return prediction
+   
+    # return [std_object.y_prediction(week + 3 + 42.9 * 7 /100) for week in std_object.x]
 
 y_lineal = analyze.lineals
 
 
-plt.plot(analyze.x, analyze.y, analyze.x, y_lineal)
-plt.ylabel("Casos confirmados")
-plt.xlabel("Prediccion")
-plt.show()
+# plt.plot(analyze.x, analyze.y, analyze.x, y_lineal)
+# plt.ylabel("Casos confirmados")
+# plt.xlabel("Prediccion")
+# plt.show()
 
-# print(get_y_line_v2(analyze))
+print(predic_last_Dec(analyze))
