@@ -20,13 +20,14 @@ class Std:
         de = sum([(xi - self.avg_x)**2 for xi in self.x])
         return de /self.n
 
-    @property
-    def y_varianza(self):
-        de = sum([(yi - self.avg_y)**2 for yi in self.y])
-        # de = 0
-        # for yi in self.y:
-        #     de += (yi - self.avg_y) **2
-        return de/self.n
+
+    def y_varianza_or_quasi(self, quasi = False):
+        if quasi == True:
+            de = sum([(yi - self.avg_y)**2 for yi in self.y])
+            return de/(self.n - 1)
+        else:
+            de = sum([(yi - self.avg_y)**2 for yi in self.y])
+            return de/self.n
 
     @property
     def covariance(self):
@@ -57,8 +58,7 @@ class Std:
     def y_prediction(self, x_value):
         return self.B * x_value + self.B0
         
-        
-        
+
     def __str__(self):
         return f"x: {self.x}\ny: {self.y}\nn: {self.n()}\n"
 
