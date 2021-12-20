@@ -1,0 +1,13 @@
+La funcion greeting se ha ejecutado:2021-12-18 12:11:45.394993
+La funcion add se ha ejecutado:2021-12-18 12:11:45.395993
+La funcion greeting se ha ejecutado:2021-12-18 12:20:01.158505
+La funcion add se ha ejecutado:2021-12-18 12:20:01.161506
+La funcion create_user se ha ejecutado:2021-12-18 12:20:27.694898
+La funcion juan se ha ejecutado:2021-12-18 12:21:07.743773
+La funcion guest se ha ejecutado:2021-12-18 12:23:13.782871
+2021-12-20 09:06:12.753815 | Usuario: guest logged in. 
+2021-12-20 09:14:40.625185 | La función create_user se ha ejecutado. 
+2021-12-20 11:19:42.553607 | Usuario: guest logged in. 
+2021-12-20 11:51:58.521647 | Usuario: peter logged in.
+2021-12-20 17:30:19.412369 | Usuario: tobias logged in.
+2021-12-20 17:57:19.155360 | Usuario: javier logged in.

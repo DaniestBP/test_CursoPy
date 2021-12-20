@@ -1,0 +1,60 @@
+{
+    "users": [
+        {
+            "name": "jose",
+            "pwd": "jgfbg"
+        },
+        {
+            "name": "pedro",
+            "pwd": "kgkgkg"
+        },
+        {
+            "name": "fsdd",
+            "pwd": "sdsd"
+        },
+        {
+            "name": "maria",
+            "pwd": "6652+6df"
+        },
+        {
+            "name": "mauro",
+            "pwd": "7ebaa1527dee7ba1286b3a65909c0b32b29f7c4f3422663f64997c6e8f4b7fca"
+        },
+        {
+            "name": "roberto",
+            "pwd": "bdef31b6af07f968cbf301bf87cfa0242d5bba4b72e515a183d95268e419226d"
+        },
+        {
+            "name": "anastasio",
+            "pwd": "b4e15d5c80c9f760970ccba7c24216a4d544ab9cdd899acf95249098c6b66983"
+        },
+        {
+            "name": "marina",
+            "pwd": "hjfhff"
+        },
+        {
+            "name": "daniel",
+            "pwd": "98dad96e9332ffdd0308d1783fab5eed04fcd18f987646096ddab8a9456539e8"
+        },
+        {
+            "name": "juan",
+            "pwd": "214c9b00e8ea3c34ea96af512ca07d1d7b2e239d51b00eceaff15376fd997013"
+        },
+        {
+            "name": "valeria",
+            "pwd": "b7fca2fd150a5a2b20e57087049dd1815ac4ad2cf17af2d34b545798d42521a1"
+        },
+        {
+            "name": "peter",
+            "pwd": "8ce297aba752a1d1482dc34c862df815a4238f5f9e94341a6e0d7dd37623c80b"
+        },
+        {
+            "name": "tobias",
+            "pwd": "df86714fc534e90b5ffa0726164516b16f207e7fb20a3b823be218c26c789f03"
+        },
+        {
+            "name": "javier",
+            "pwd": "df86714fc534e90b5ffa0726164516b16f207e7fb20a3b823be218c26c789f03"
+        }
+    ]
+}
