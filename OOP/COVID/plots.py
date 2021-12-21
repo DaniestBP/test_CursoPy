@@ -1,9 +1,6 @@
-from main import analyze_cct, y_lineal
-import matplotlib as Plt
-from SSRace import std_y_tia_20211214, std_y_tia_20201215
+import matplotlib.pyplot as Plt
+from SSRace import list_y_tia_20211214, list_y_tia_20201215, list_x_tia
 
-Plt.plot(analyze_cct.x, analyze_cct.y, analyze_cct.x, y_lineal)
-Plt.ylabel("Casos confirmados")
-Plt.xlabel("Prediccion")
+
+Plt.plot(list_x_tia,list_y_tia_20211214)
 Plt.show()
-

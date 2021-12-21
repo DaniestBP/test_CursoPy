@@ -17,8 +17,8 @@ list_x_tia = tuple(num for num in range(0, len(list_y_tia_20201215)))
 
 std_y_tia_20211214 = Std(list_x_tia, list_y_tia_20211214) # OBJETO ESTADISTICO 1
 std_y_tia_20201215 = Std(list_x_tia, list_y_tia_20201215) # OBJETO ESTADISTICO 2
-print(std_y_tia_20211214.avg_y) 
-print(std_y_tia_20201215.avg_y)
+# print(std_y_tia_20211214.avg_y) 
+# print(std_y_tia_20201215.avg_y)
 
 # DEFINIMOS LA ESTADISTICA DE CONTRASTE PARA NUESTROS DATOS
 

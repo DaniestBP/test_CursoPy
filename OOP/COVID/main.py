@@ -39,7 +39,7 @@ y = get_y(data_by_date)
 y.reverse()
 x = [num for num in range(0, len(y))]
 
-analyze_cct = Std(x,y)  #Analizamos los casos confirmados totales
+analyze_cct = Std(x,y)  #Analizamos los casos confirmados totales(acumulados)
 
 # def get_y_line(std_object):
 #     B = std_object.B

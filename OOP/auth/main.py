@@ -1,16 +1,12 @@
 import json
 from hashlib import sha256
-from deco import log
+from deco import authentication, log
+from random import random
+
+
 DB = "./users.json"
 
-# def get_users(json_file):
-#         with open(json_file, encoding="utf8 ") as file:
-#             return json.load(file)
-
-
-# def create_user(data, json_file):
-#      with open (json_file, mode="w", encoding="utf8") as file:
-#          json.dump(data, file, ensure_ascii=False, indent=4)
+SECRET = b"perro"
 
 class User:
     def __init__ (self,name,pwd):
@@ -18,42 +14,90 @@ class User:
         pwd_e = sha256(pwd.encode()).hexdigest()
         self.pwd = pwd_e
 
+    @property
+    def user_dict(self):
+        return {
+            "name": self.name,
+            "pwd": self.pwd
+        }
 
 class Auth:
-    def __init__(self,user,db):
-        self.user = user
+    def __init__(self,db):
         self.db = db
-
+        
 
     @property
     def users(self):
-        with open(self.db, encoding="utf8 ") as file:
+        with open(self.db, encoding="utf8") as file:
             return json.load(file)
     
+    @property
+    def cookies(self):
+        with open("./cookies.json", encoding = "utf8")as file:
+            return json.load(file)
     
-    def create_user(self):
+    def create_user(self,user):
         data = self.users
-        data["users"].append({"name": self.user.name, "pwd": self.user.pwd}) 
+        data["users"].append(user) 
         with open (self.db, mode="w", encoding="utf8") as file:
             json.dump(data,file,ensure_ascii=False, indent=4) 
-           
-    @log
-    def log_in(self,login_user):
-        data = self.users
-        list_login = list(filter(lambda u: u["name"] == login_user.name,data["users"]))
-        try:
-            confirmed_pwd = list_login[0]["pwd"] 
-            if confirmed_pwd == login_user.pwd:
-                return login_user
+
+
+    def create_token(self,user):
+        token = sha256(user["name"].encode())
+        token.update(SECRET)
+        token.update(str(random()).encode())
+        return token.hexdigest()
+
+
+    def get_user(self):
+        db_user = next(filter(lambda db_user: db_user[1]["name"] == user["name"], self.users["users"]), False)
+        return db_user
+
+    
+    # @authentication
+    # @log 
+    def log_in(self,user):
+        i, db_user = next(filter(lambda db_user: db_user[1]["name"] == user["name"],enumerate(self.users["users"])),(None, False))
+        if db_user:
+            if db_user["pwd"] == user["pwd"]:
+                db_user["token"] = self.create_token(db_user)
+                data = self.users
+                data["users"][i] = db_user
+                users_db = open(self.db, "w", encoding="utf8")
+                json.dump(data, users_db,ensure_ascii=False, indent=4 )
+                users_db.close()
+                cookies = self.cookies
+                cookies["tokens"] = {"name": db_user["name"], "token":db_user["token"]}
+                cookies_db = open("./cookies.json", "w", encoding="utf8")
+                json.dump(cookies, cookies_db,ensure_ascii=False, indent=4)
+                cookies_db.close()
+                return True
             else:
-                return User("guest","")
+                return False
 
-        except:
-            return User("guest","")   
-            
-        
-        
+        else:
+            return False
 
+                
+    
+    def authentication(self, f):
+        user_name, user_token = self.cookies["token"].values()
+        db_user = self.get_user(user_name)
+        def inner():
+            if db_user:
+                if db_user["token"] == user_token:
+                    return f()
+                else:
+                    return False
+            else:
+                return False
+        return inner
+           
+                     
+
+
+auth = Auth(DB)   
 user = ""
 
 while user != "q":
@@ -80,23 +124,29 @@ while user != "q":
             print("\nFalta algun símbolo")
         else:
             user_instance = User(user_name,passw)
-            auth = Auth(user_instance, DB)
-            auth.create_user()
-            
+            auth.create_user(user_instance.user_dict)           
         
-
-
-    if user == "2":
+    elif user == "2":
         user_name = input("Introduzca su nombre: ").lower()
         passw = input("Escribe una contraseña: ")
         user_instance = User(user_name,passw)
-        auth = Auth(user_instance, DB)
-        auth.log_in(user_instance)
+        if auth.log_in(user_instance.user_dict):
+            print(f"\nBienvenido {user_instance.name}. Se ha logueado correctamente.")
+        else:
+            print("\nLo sentimos.No tenemos ningún usuario con estas credenciales")
+
+    elif user == "3":
+        @auth.authentication
+        def restricted_menu():
+            print( "\nSección restrigida")
+
+
+            
         input("...")
+
         
-            
-            
-    
+        
+        
         
 
         
