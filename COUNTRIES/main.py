@@ -47,13 +47,20 @@ while user != "q":
         if res.status_code == 200:
             countries = res.json()
             random_country = random.choice(countries)
-            print(random_country["name"]["common"])
-            for random_country in countries:
-                pass
-                # quizz = [
-                #      "Cuál es la capital de {random_country}?",
-                #      "Cuál es el idioma de {random_country}?",
-                #      "Qué población tiene {random_country}?"
-                # ]
-                # print(quizz)
+            count_to_play = random_country["name"]["common"]
+            print(count_to_play)
+            print(f"Cuál es la capital de {count_to_play}?")
+            answer = input(f"Respuesta(1 punto): ").capitalize()
+            score = 0
+            if random_country["capital"][0] == answer:
+                score += 1
+                print(f" Has acertado! Tu puntuación es: {score}")
+
+
+            
+            #         "Cuál es el idioma de {count_to_play}?"
+            #         "Qué población tiene {count_to_play}?"
+            # ]
+            
+            
     
