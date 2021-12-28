@@ -1,6 +1,6 @@
 import json
-from hashlib import sha256
-from deco import authentication, log
+from hashlib import new, sha256
+from deco import log
 from random import random
 
 
@@ -21,11 +21,24 @@ class User:
             "pwd": self.pwd
         }
 
+class Admin(User):
+    def __init__(self, name, pwd):
+        super().__init__(name, pwd)
+        self.is_admin = True
+
+    def user_update(self, old_name, new_name, auth):
+        users = auth.users
+        for user in users["users"]:
+            if user["name"] == old_name:
+                user["name"] = new_name
+                break
+        auth.write_data(users, auth.db)
+
+        
 class Auth:
     def __init__(self,db):
         self.db = db
         
-
     @property
     def users(self):
         with open(self.db, encoding="utf8") as file:
@@ -50,52 +63,62 @@ class Auth:
         return token.hexdigest()
 
 
-    def get_user(self):
-        db_user = next(filter(lambda db_user: db_user[1]["name"] == user["name"], self.users["users"]), False)
+    def get_user(self, user_name):
+        db_user = next(filter(lambda db_user: db_user["name"] == user_name, self.users["users"]), False)
         return db_user
 
+    def write_data(self, new_data, json_file):
+        data = open(json_file, "w", encoding="utf8")
+        json.dump(new_data, data,ensure_ascii=False, indent=4 )
+        data.close()
     
-    # @authentication
-    # @log 
+  
+    @log 
     def log_in(self,user):
         i, db_user = next(filter(lambda db_user: db_user[1]["name"] == user["name"],enumerate(self.users["users"])),(None, False))
         if db_user:
             if db_user["pwd"] == user["pwd"]:
                 db_user["token"] = self.create_token(db_user)
+                
                 data = self.users
                 data["users"][i] = db_user
-                users_db = open(self.db, "w", encoding="utf8")
-                json.dump(data, users_db,ensure_ascii=False, indent=4 )
-                users_db.close()
+                self.write_data(data, self.db)
+                
                 cookies = self.cookies
                 cookies["tokens"] = {"name": db_user["name"], "token":db_user["token"]}
-                cookies_db = open("./cookies.json", "w", encoding="utf8")
-                json.dump(cookies, cookies_db,ensure_ascii=False, indent=4)
-                cookies_db.close()
+                self.write_data(cookies,"./cookies.json" )
+
                 return True
             else:
                 return False
-
         else:
             return False
 
-                
     
-    def authentication(self, f):
-        user_name, user_token = self.cookies["token"].values()
-        db_user = self.get_user(user_name)
+    def authentication(self, f_to_deco):
         def inner():
+            user_name, user_token = self.cookies["tokens"].values()
+            db_user = self.get_user(user_name)
             if db_user:
                 if db_user["token"] == user_token:
-                    return f()
+                    
+                    return f_to_deco()
                 else:
                     return False
             else:
                 return False
-        return inner
+        return inner()
            
-                     
+    def is_admin(self, f):
+        def inner():
+            user_name, _ = self.cookies["tokens"].values()
+            db_user = self.get_user(user_name)
+            if db_user ["is_admin"]:
+                return f()
+        return inner 
 
+
+            
 
 auth = Auth(DB)   
 user = ""
@@ -104,7 +127,8 @@ while user != "q":
     print("\n"+" Bienvenido ".center(150 - len("Bienvenido"), "*") + "\n")
     print("1. Crear Usuario \n".center(150- len("1. Crear Usuario ")))
     print("2. Log in \n".center(145 - len("2. Log in ")))
-    print("Pulse Q para salir\n".center(150- len("Pulse Q para salir")))
+    print("3. Editar usuario(sólo admin)    " "\n".center(158 - len("3. Editar usuario(sólo admin)")))
+    print("\n"+"Pulse Q para salir\n")
 
     user = input("Escoja: ")
         
@@ -137,13 +161,25 @@ while user != "q":
 
     elif user == "3":
         @auth.authentication
-        def restricted_menu():
-            print( "\nSección restrigida")
+        @auth.is_admin
+        def update_user():
+            for i, user in enumerate(auth.users["users"]):
+                print(f"{i+1}:{user['name']}")
+            user = int(input(":")) - 1
+            new_name = input("Nuevo nombre: ")
+            admin_instance = Admin("admin", "1234")
+            print("Está seguro?")
+            decision = input("Y/N: ")
+            if decision.lower() == "y":
+                admin_instance.user_update(auth.users["users"][user]["name"], new_name, auth)
+                print("Los cambio se han realizado")
+            else:
+                print("No hemos podido realizar los cambios")
+
 
 
             
-        input("...")
-
+       
         
         
         

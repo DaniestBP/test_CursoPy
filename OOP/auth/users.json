@@ -55,17 +55,20 @@
         {
             "name": "javier",
             "pwd": "df86714fc534e90b5ffa0726164516b16f207e7fb20a3b823be218c26c789f03",
-            "token": "14b4a9d78c2edeb3a10242c252e341e93b09401e4ce66c66c9965996e2140bdb"
+            "token": "14b4a9d78c2edeb3a10242c252e341e93b09401e4ce66c66c9965996e2140bdb",
+            "is_admin": true
         },
         {
             "name": "gonzalo",
             "pwd": "df86714fc534e90b5ffa0726164516b16f207e7fb20a3b823be218c26c789f03",
-            "token": "56ba63ac9da39fbdbcac6e6948c2a96073eb4046c90b70335d53a97a64a0a79e"
+            "token": "2b9e17c3f4fe205094bed8bca1784b6399d5689278d782f6a6b109152ce9d4e1",
+            "is_admin": false
         },
         {
-            "name": "roberta",
+            "name": "julian",
             "pwd": "df86714fc534e90b5ffa0726164516b16f207e7fb20a3b823be218c26c789f03",
-            "token": "b42d6a92d988d90911a321e6716e0a8cbecca143a99311db6d1d91ffd218ade4"
+            "token": "e82cd76021a92a806262402874bb1c5d2e837b642f0254569b7286cc34166dea",
+            "is_admin": true
         }
     ]
 }
