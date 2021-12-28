@@ -1,0 +1,35 @@
+La funcion greeting se ha ejecutado:2021-12-18 12:11:45.394993
+La funcion add se ha ejecutado:2021-12-18 12:11:45.395993
+La funcion greeting se ha ejecutado:2021-12-18 12:20:01.158505
+La funcion add se ha ejecutado:2021-12-18 12:20:01.161506
+La funcion create_user se ha ejecutado:2021-12-18 12:20:27.694898
+La funcion juan se ha ejecutado:2021-12-18 12:21:07.743773
+La funcion guest se ha ejecutado:2021-12-18 12:23:13.782871
+2021-12-20 09:06:12.753815 | Usuario: guest logged in. 
+2021-12-20 09:14:40.625185 | La función create_user se ha ejecutado. 
+2021-12-20 11:19:42.553607 | Usuario: guest logged in. 
+2021-12-20 11:51:58.521647 | Usuario: peter logged in.
+2021-12-20 17:30:19.412369 | Usuario: tobias logged in.
+2021-12-20 17:57:19.155360 | Usuario: javier logged in.
+2021-12-20 18:47:01.671069 | Usuario: javier logged in.
+2021-12-20 19:20:12.956682 | Usuario: javier logged in.
+2021-12-20 19:40:32.804077 | Usuario: javier logged in.
+2021-12-20 19:41:16.844024 | Usuario: javier logged in.
+2021-12-20 19:42:05.235926 | Usuario: javier logged in.
+2021-12-20 19:42:31.724001 | Usuario: javier logged in.
+2021-12-20 19:56:20.355337 | Usuario: javier logged in.
+2021-12-21 18:20:32.649203 | La función log_inse ha ejecutado
+2021-12-21 18:46:48.437044 | La función log_in se ha ejecutado
+2021-12-21 18:47:32.260968 | La función log_in se ha ejecutado
+2021-12-21 18:51:48.652843 | Usuario: {} logged in.
+2021-12-21 18:52:51.477374 | La función log_in se ha ejecutado
+2021-12-21 18:53:42.644768 | La función log_in se ha ejecutado
+2021-12-21 18:55:39.764690 | Usuario: {} logged in.
+2021-12-21 18:57:28.620618 | La función log_in se ha ejecutado
+2021-12-21 19:05:30.210291 | Usuario: javier logged in.
+2021-12-21 19:08:29.796164 | Usuario: javier logged in.
+2021-12-21 19:54:35.250148 | Usuario: roberta logged in.
+2021-12-21 20:34:41.709536 | Usuario: gonzalo logged in.
+2021-12-22 16:40:43.988524 | Usuario: roberta logged in.
+2021-12-23 17:50:46.470686 | Usuario: julian logged in.
+2021-12-23 17:51:35.233444 | Usuario: gonzalo logged in.
