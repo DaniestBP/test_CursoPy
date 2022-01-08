@@ -7,15 +7,17 @@ CWD = os.path.dirname(__file__)
 
 url = "https://restcountries.com/v3.1/all"
 
+
+
 user = ""
 
-def quiz(countries, region):
+def quiz(countries, region):    
     countries_zip = []
     for country in countries:
         try:
             capital = country["capital"][0]
-        except Exception as e:
-            print(e)
+        except Exception:
+            pass
         countries_zip.append({
             "name": country["name"]["common"], 
             "capital": capital, 
@@ -108,7 +110,7 @@ def quiz(countries, region):
 
 
 while user != "q":
-    print("\n"+" Bienvenido a tu base de datos de PAISES DEL MUDO preferida ".center(150,"*"))
+    print("\n"+" Bienvenido a tu base de datos de PAISES DEL MUNDO preferida ".center(150,"*"))
     print("\n1. Buscar país")
     print("2. Descarga tu bandera")
     print("3. Juega con nosotros")
@@ -158,13 +160,15 @@ while user != "q":
                 for i, option in enumerate (q["o"]):
                     print(f"{i+1}: {option}")
                 answer = q["o"][int(input(": "))-1]
-                q["user"] = answer
+                q["user"] = str(answer)
                 user_answer.append({q["q"]:answer})
                 if q["a"] == q["user"]:
                     note += 1
+                    
             print("\n" + str(game))
             print("\n" + str(user_answer))
             print("\n"+f" ¡ Tu NOTA es: {note} !".center(100))
+    
 
 
 

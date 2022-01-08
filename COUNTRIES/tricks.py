@@ -4,7 +4,7 @@ import json
 url = "https://restcountries.com/v3.1/all"
 all = req.get(url).json()
 
-countries_p = []
+# countries_p = []
 
 # for country in all:
 #     try:
@@ -13,11 +13,17 @@ countries_p = []
 #     except:
 #         None
 countries_p = list(filter(lambda country: country["name"]["common"].lower().startswith("p"),all))
+# print(countries_p[0]["name"]["common"])
+countries_p2 = list(map(lambda country: country if country["name"]["common"].lower().startswith("p") else None ,all))
+# print(countries_p2)
+countries_p3 = [country for country in countries_p if country]
+# print(countries_p3[1]["name"]["common"])
 
-countries_p = list(map(lambda country: country if country["name"]["common"].lower().startswith("p") else None ,all))
-# print(countries_p[0])
-countries_p = [country for country in countries_p if country]
-# print(countries_p[1]["name"]["common"])
+
+# country = next(mylist)
+# print(country)
+# country = next(mylist)
+# print(country)
 '''
 for country in countries_p:
     if country:
@@ -70,10 +76,10 @@ b = squares(a)
 
 c_g = (num ** 2 for num in a) # Si colocamos parentesis en lugar de corchetes la espresión se vuelve generadora
 c_cl = [num ** 2 for num in a]
-print(c_g)
-print(c_cl)
-for num in c_g:
-    print(num)
+# print(next(c_g))
+# print(c_cl)
+# for num in c_g:
+#     print(num)
 
 
 
