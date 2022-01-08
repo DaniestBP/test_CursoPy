@@ -113,12 +113,15 @@ class Auth:
         def inner():
             user_name, _ = self.cookies["tokens"].values()
             db_user = self.get_user(user_name)
-            if db_user ["is_admin"]:
-                return f()
+            try:
+                if db_user ["is_admin"]:
+                    return f()
+            except:
+                print("\n" + f" Lo sentimos, {user_name}. Sólo usuarios admin pueden hacer cambios ".center(100, "-")+"\n")
+                return None
         return inner 
 
-
-            
+    
 
 auth = Auth(DB)   
 user = ""
@@ -142,10 +145,12 @@ while user != "q":
             print("\nFalta alguna mayúscula")
         elif passw.isupper():
             print("\nFalta alguna minúscula")
+        elif passw.isalpha():
+            print("\nFalta algún número")
         elif passw.isnumeric():
             print("\nNo pueden ser todo números")
-        elif passw.isalpha():
-            print("\nFalta algun símbolo")
+        elif passw.isidentifier():
+            print("\nFalta algun símbolo.(No se considera '_' un símbolo)")
         else:
             user_instance = User(user_name,passw)
             auth.create_user(user_instance.user_dict)           
@@ -157,7 +162,7 @@ while user != "q":
         if auth.log_in(user_instance.user_dict):
             print(f"\nBienvenido {user_instance.name}. Se ha logueado correctamente.")
         else:
-            print("\nLo sentimos.No tenemos ningún usuario con estas credenciales")
+            print(f"\nLo sentimos.No tenemos ningún usuario con estas credenciales")
 
     elif user == "3":
         @auth.authentication

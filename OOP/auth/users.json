@@ -9,7 +9,7 @@
             "pwd": "kgkgkg"
         },
         {
-            "name": "fsdd",
+            "name": "CR7",
             "pwd": "sdsd"
         },
         {
@@ -61,14 +61,28 @@
         {
             "name": "gonzalo",
             "pwd": "df86714fc534e90b5ffa0726164516b16f207e7fb20a3b823be218c26c789f03",
-            "token": "2b9e17c3f4fe205094bed8bca1784b6399d5689278d782f6a6b109152ce9d4e1",
-            "is_admin": false
+            "token": "2b9e17c3f4fe205094bed8bca1784b6399d5689278d782f6a6b109152ce9d4e1"
         },
         {
             "name": "julian",
             "pwd": "df86714fc534e90b5ffa0726164516b16f207e7fb20a3b823be218c26c789f03",
-            "token": "e82cd76021a92a806262402874bb1c5d2e837b642f0254569b7286cc34166dea",
+            "token": "8936810d520df1f81f8ca401cae5beb1ca879ef58182405f10a40f698f7284ed",
             "is_admin": true
+        },
+        {
+            "name": "filomena",
+            "pwd": "df86714fc534e90b5ffa0726164516b16f207e7fb20a3b823be218c26c789f03",
+            "token": "2d1c9b0fb631b9d0da9dcda001443ef5839191b12dfc9d7d96eb3fdeb6112c01"
+        },
+        {
+            "name": "messi",
+            "pwd": "caf1229c4988315d467cbefbec258a0f67f817e385d28b6dc033022bd23ae0d5",
+            "token": "97a54825b29998d084922c9715a5de191f7c9129b74bf0fc66e55f1082785739"
+        },
+        {
+            "name": "Dani",
+            "pwd": "df86714fc534e90b5ffa0726164516b16f207e7fb20a3b823be218c26c789f03",
+            "token": "9749c5f729bf5baf506ce7659ccd5737118f0610e582adfdd9b828c412795b18"
         }
     ]
 }
