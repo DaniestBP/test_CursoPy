@@ -34,7 +34,7 @@ def log(func):
                 if result == True:
                     file.write(f"{time} | Usuario: {user} logged in.\n")
             except:
-                 file.write(f"{time} | La función {func.__name__} se ha ejecutado\n")
+                    file.write(f"{time} | La función {func.__name__} se ha ejecutado\n")
         return result
     return inner
         
