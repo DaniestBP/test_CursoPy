@@ -69,9 +69,7 @@ DB = [{
 },
 ]
 
-genres = ["Narrativa extranjera", "Divulgación científica", "Narrativa policíaca", "Ciencia ficción", "Autoayuda"]
-
-# DB = []
+genres = ["Narrativa extranjera", "Divulgación científica", "Narrativa policíaca", "Ciencia ficción"]
 
 user = "0"
 
@@ -81,13 +79,13 @@ user = "0"
 def menu():
     print("\n" + "BIENVENIDO A LIBRERIA FANTASIA".center(190, "-")+"\n")
     print("\n" + "Busque su libro".center(130)+"\n"*2)
-    print("1. Id: " + (" "* (149 - len("1. Id: "))) + "#"+"\n")
-    print("2. Title: " + (" "* (149 - len("2. Title: "))) + "#"+"\n")
-    print("3. Author: " + (" "* (149 - len("3. Author: "))) + "#"+"\n")
-    print("4. Genre: " + (" "* (149 - len("4. Genre: "))) + "#"+"\n")
-    print("5. Update: " + (" "* (149 - len("5. Update: "))) + "#"+"\n")
-    print("6. Eliminar libros: " + (" "* (149 - len("6. Eliminar libros: "))) + "#"+"\n")
-    print("Q. Salir: " + (" "* (149 - len("Q. Salir: "))) + "#"+"\n")
+    print("1. Id: " + (" "* (149 - len("1. Id: "))), "#"+"\n")
+    print("2. Title: " + (" "* (149 - len("2. Title: "))), "#"+"\n")
+    print("3. Author: " + (" "* (149 - len("3. Author: "))), "#"+"\n")
+    print("4. Genre: " + (" "* (149 - len("4. Genre: "))), "#"+"\n")
+    print("5. Update: " + (" "* (149 - len("5. Update: "))),"#"+"\n")
+    print("6. Eliminar libros: " + (" "* (149 - len("6. Eliminar libros: "))),"#"+"\n")
+    print("Q. Salir: " + (" "* (149 - len("Q. Salir: "))),"#"+"\n")
     print("\n" + "#"*150)
 
 
@@ -135,10 +133,13 @@ def get_by_term(term, search_term):
 
 def update_book(book):
     print("Si no desea modificar pulse Enter")
+    pretty_book(book)
     for k, v in list(book.items())[1:]:
         user = input(f"{k}: ")
         if user:
-            book[k] = user
+            book[v] = user
+                
+            
        
 def write_to_record(search_term, to_write):
     with open(f"{cwd}/test.txt", mode="a+", encoding="utf8") as file:
@@ -161,7 +162,6 @@ def read_csv(dataset, file_name):
             }
             DB.append(new_dict)
 
-# read_csv(DB, "books.csv")
 
 
 

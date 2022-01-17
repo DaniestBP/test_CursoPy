@@ -1,25 +1,6 @@
 from bookshop import *
+import os
 
-
-
-# with open(f"{cwd}/errors.log", mode="a") as file:
-#     file.write("Error 1: Missing User ID")
-
-# fichero = open("./lectura/test.txt")
-# lectura = fichero.read()
-
-# Análisis del fichero:
-
-# mama = lectura[(lectura.find("mama")):]
-# print(mama)
-
-# with open("./test.txt", mode="a") as file:
-#     file.write("Hola papá")
-
-
-# fichero.close()
-    
-    
 user = "0"
 
 while user != "q":
@@ -33,10 +14,11 @@ while user != "q":
             for book in books:
                 pretty_book(book)
                 write_to_record(user, book)
- 
         else:
             print("\n"+" No se ha encontrado NINGÚN RESULTADO ".center(190,"*")+"\n")
         input()
+                
+            
     
     elif user == "2":
         user = input("Escriba el Titulo:  ")
@@ -47,6 +29,8 @@ while user != "q":
                 write_to_record(user, book)
         else:
             print("\n"+" No se ha encontrado NINGÚN RESULTADO ".center(190,"*")+"\n")
+                
+           
        
     elif user == "3":
         user = input("Escriba el Autor:  ")
@@ -57,6 +41,8 @@ while user != "q":
                 write_to_record(user, book)
         else:
             print("\n"+" No se ha encontrado NINGÚN RESULTADO ".center(190,"*")+"\n")
+                
+            
         
     elif user == "4":
         for i, genre in enumerate(genres):
@@ -73,8 +59,9 @@ while user != "q":
             print("-"*50)
             if i % 2 == 0:
                 input("Siguiente: ")
-                   
         input()
+                
+                   
                 
 
     
@@ -85,9 +72,12 @@ while user != "q":
             update_book(book_to_update)
             write_to_record(user, book_to_update)
             print(f"El libro {book_to_update['title']} se ha mofificado".center(175, "*")+ "\n")
+            
         else:
             print("La informacion proporcionada no coincide con nuestra base de datos".center(190,"*")+"\n")
         print(DB)
+            
+        
 
     elif user == "6":
         user = input("Buscar libro a eliminar por ID: ")
@@ -99,6 +89,8 @@ while user != "q":
         else:
             print("\n"+" No se ha encontrado NINGÚN RESULTADO ".center(190,"*")+"\n")
         print(DB)
+            
+            
         
 
     elif user == "q":
@@ -107,7 +99,8 @@ while user != "q":
             export_csv(DB,"books.csv")
         print(" Thanks! Good bye! ".center(175, "-"))
         user = "q"        
-user = "0"
+        
+user = ""
             
         
             
