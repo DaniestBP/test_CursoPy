@@ -18,7 +18,6 @@ while user != "q":
             print("\n"+" No se ha encontrado NINGÚN RESULTADO ".center(190,"*")+"\n")
         input()
                 
-            
     
     elif user == "2":
         user = input("Escriba el Titulo:  ")
@@ -30,7 +29,6 @@ while user != "q":
         else:
             print("\n"+" No se ha encontrado NINGÚN RESULTADO ".center(190,"*")+"\n")
                 
-           
        
     elif user == "3":
         user = input("Escriba el Autor:  ")
@@ -42,29 +40,28 @@ while user != "q":
         else:
             print("\n"+" No se ha encontrado NINGÚN RESULTADO ".center(190,"*")+"\n")
                 
-            
         
     elif user == "4":
         for i, genre in enumerate(genres):
             print(f"{i + 1}. {genre}")
         user = int(input("Género Nº: ")) -1
-        user = genres[user]
-        books = get_by_term ("genre", user)
-
-        if len(books):
-            write_to_record(user, [f'Se ha buscado {book["genre"]}: {book["author"]} - {book["title"]}\n' for book in books]) 
-
-        for i, book in enumerate(books):
-            pretty_book(book)
-            print("-"*50)
-            if i % 2 == 0:
-                input("Siguiente: ")
+        if user <= 3:
+            user = genres[user]     
+            books = get_by_term ("genre", user)
+            if len(books):
+                write_to_record(user, [f'Se ha buscado {book["genre"]}: {book["author"]} - {book["title"]}\n' for book in books])
+        
+            for i, book in enumerate(books):
+                    pretty_book(book)
+                    print("-"*50)
+                    if i % 2 == 0:
+                        input("Siguiente: ")
+        else:
+            print("\nPlease select 1 from the 4 genres available")
+       
         input()
-                
-                   
-                
+        
 
-    
     elif user == "5":
         user = input("Buscar libro a mofificar por ID: ")   
         book_to_update = search_id(user)
@@ -84,7 +81,7 @@ while user != "q":
         book_to_erase = search_id(user)
         if book_to_erase:
             DB.remove(book_to_erase)
-            print(f"El libro {book_to_erase['title']} se ha eliminado".center(175, "*"))
+            print("\n" + f" El libro {book_to_erase['title']} se ha eliminado ".center(175, "*")+"\n")
             write_to_record(user, book_to_erase)
         else:
             print("\n"+" No se ha encontrado NINGÚN RESULTADO ".center(190,"*")+"\n")
@@ -99,7 +96,9 @@ while user != "q":
             export_csv(DB,"books.csv")
         print(" Thanks! Good bye! ".center(175, "-"))
         user = "q"        
-        
+    
+    else:
+        print(" \nPlease, choose one from the available options ")
 user = ""
             
         

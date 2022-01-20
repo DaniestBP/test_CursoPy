@@ -1,7 +1,4 @@
 ########################     Function creation exercice: managing a bookshop
-# comented
-
-# from functools import total_ordering
 from os import path
 import csv
 
@@ -92,31 +89,29 @@ def menu():
 
 
 def search_id(usuario_id):
-    
     for libro in DB:
         if libro["id"].lower() == usuario_id:
             return libro
     return None    
     
-def search_title(usuario_title):
     
+def search_title(usuario_title):
     for libro in DB:
         if libro["title"] == usuario_title:
             return libro
     return None
-def search_author(usuario_author):
     
+def search_author(usuario_author):
     for libro in DB:
         if libro["author"] == usuario_author:
             return libro
     return None
+    
 def search_genre(usuario_genre):
-
     for libro in DB:
         if libro["genre"] == usuario_genre:
             return libro 
     return None
-
 
 
 def pretty_book(book):
@@ -128,8 +123,9 @@ def get_by_term(term, search_term):
     result = []
     for book in DB:
         if book[term].lower().find(search_term.lower()) >= 0:
-            result.append(book)    
+            result.append(book) 
     return result        
+        
 
 def update_book(book):
     print("Si no desea modificar pulse Enter")
@@ -137,8 +133,8 @@ def update_book(book):
     for k, v in list(book.items())[1:]:
         user = input(f"{k}: ")
         if user:
-            book[v] = user
-                
+            book[k] = user
+            print(book)    
             
        
 def write_to_record(search_term, to_write):
@@ -149,7 +145,7 @@ def write_to_record(search_term, to_write):
             file.writelines(to_write)
             
 
-def read_csv(dataset, file_name):
+def read_csv(file_name):
     with open(file_name, mode="r", enconding ="utf8")as file:
         csv_reader= csv.reader(file, delimiter=";")
         next(csv_reader)
