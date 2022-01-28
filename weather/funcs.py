@@ -21,7 +21,6 @@ def pretty_print(forecast):
 
 
 def get_data(json_file):
-    # Si el archivo no esta creado lanza un exeption error
     try:   
         with open(json_file, encoding="utf8 ") as file:
             return json.load(file)
@@ -46,23 +45,21 @@ def get_woeid(location, **kwargs):
         url = f"https://www.metaweather.com/api/location/search/?{term}={location}"
         woeid = req.get(url)
         
-        # si el request es correcto woeid.status_code == 200
         if woeid:
             woeid = woeid.json()
-            # woeid no esta vacio
             if woeid:
                 for loc in woeid:
                     woeids[loc["title"].lower()] = loc["woeid"]
                 write_data(woeids, "woeids.json")
-                    
                 if limit:
                     return [dic["woeid"] for dic in woeid[0:limit]]
                 else:
                     return [woeid[0]["woeid"]]
             else:
                 return []
-           
     return [woeid]
+                    
+           
          
 
 def get_forecast(location, **kwargs):
@@ -70,21 +67,17 @@ def get_forecast(location, **kwargs):
 
     if woeid:
         woeid = woeid[0]
-        url = f"https://www.metaweather.com/api/location/{woeid}/" 
-           
+        url = f"https://www.metaweather.com/api/location/{woeid}/"     
         date = kwargs.get("date")
         if date:
             url += date
-                     
-        forecast = req.get(url)  # si el request es correcto forecast.status_code == 200
-        
+        forecast = req.get(url)
+    
         if forecast:
             forecast = forecast.json()
             if forecast:
-                # con date se devuelve ya una lista solo de forecasts
                 if not date:
                     forecast = forecast["consolidated_weather"]
-                # Devuelvo las tres primeras predicciones
                 fore_reduc = []
                     
                 for predict in forecast[:3]:
@@ -100,11 +93,8 @@ def get_forecast(location, **kwargs):
                         "wind_direction": predict["wind_direction"]
                     })
                 return fore_reduc
-                
     return []
-    # si hubo algun problema con la request, si forecast estaba vacio
-    # o si el woeid estaba vacio, devolvemos una lista vacia
-
+        
 
 
 def calculate_trip(A,B):
@@ -121,7 +111,6 @@ def calculate_trip(A,B):
                 B_woeid, B_distance = des["woeid"], des["distance"]
                 
         if B_woeid:
-            # get forecast devulve un lista de lo que hay en consolidated_weather
             A_forecast, B_forecast = get_forecast(A)[0], get_forecast(B)[0]
             if A_forecast["abbr"] in ("sn", "sl", "h", "t", "hr") or B_forecast["abbr"] in ("sn", "sl", "h", "t", "hr"):
                 is_bad_weather = True
