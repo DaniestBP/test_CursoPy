@@ -1,0 +1,29 @@
+{%extends "base.html"%}
+{%block head%}
+<script src ="{{url_for('static', filename='index.js')}}"></script>
+<script src ="{{url_for('static', filename='styles.css')}}"></script>
+{%endblock%}
+{%block content%}
+<a class="h4 d-flex justify-content-end" style ="margin-right:1.5rem" href= "{{url_for('users.logout')}}" onclick="alert_f()">Log out</a>
+
+<div  id= "test" class="questionary" style="padding-top:5%">
+    <h3 class="text-center" id="grade">Grade</h3> 
+    <a id ="try" href="http://localhost:5000/tests/exam" class="link-primary d-flex justify-content-center h4"></a>
+   
+    {%for question in questions%}
+    
+    <div class="box">
+        <h5 class="query" for="{{question.id}}">{{question.question}}</h5>
+        {%for option in question.options%}
+        <div style="display: flex;">
+            <input style="margin-right: 5px;" type="radio" id="{{option.id}}" name="{{question.id}}" value="{{option.id}}" >
+            <label for="">{{option.option}}</label>
+        </div>
+        {%endfor%}
+    </div>
+    {%endfor%}
+
+    <button class="btn btn-primary float-right" onclick="grade_test()">Submit</button>
+    
+</div>        
+{%endblock%}

@@ -1,0 +1,31 @@
+{%extends "base.html"%}
+
+{%block head%}
+<script src ="index.js"></script>
+{%endblock%}
+
+{%block content%}
+
+<h2 class ="d-flex justify-content-center" style="padding-top:5%">{{text}}</h2>
+
+<div class="formulario">
+    <form  action="" method="POST" >
+        <div>
+            <label for="">Email address
+                <input type="text" name="email" id="" required>
+            </label>
+        </div>
+        <br>
+        <div>
+            <label for="">Password
+                <input type="password" name="pwd" id="" required>
+            </label>
+        </div>
+        <br>
+        <button class="btn btn-primary float-right" type="submit">Submit</button>
+        <a  class = "d-flex flex-row" href="http://localhost:5000/users/signup">Are you new? Click here</a>
+    </form>
+</div>
+
+{%endblock%}
+<h3>no seré mostrado</h3>
