@@ -1,0 +1,57 @@
+{%extends "base.html"%}
+
+{%block head%}
+<script src ="{{url_for('static', filename='index.js')}}" defer></script>
+<script src ="{{url_for('static', filename='styles.css')}}"></script>
+{%endblock%}
+
+{%block content%}
+<a href="{{url_for('logout')}}" class="d-flex justify-content-end"><button class="btn btn-success m-3" type="button">Log out
+</button></a>
+
+<div>
+    <h2 class ="d-flex justify-content-center">{{text}}</h2>
+    <div class="sticky">
+        <a href="{{url_for('create_ad')}}" class="d-flex justify-content-start">
+            <button class="btn btn-success m-3" type="button">Build up new space</button>
+        </a>
+    </div>
+</div>
+
+
+{%for advert in us_adverts%}
+<div class="card text-center">
+    <div class="card-header">
+      {{advert.description}}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{advert.address}}</h5>
+      <p class="card-text">Phone: {{advert.contact_phone}}, Email: {{advert.contact_email}}.</p>
+      <a href="{{url_for('edit_space', adv_id = advert.id )}}" name="" class="btn btn-primary">Edit your space</a>
+    </div>
+    <div class="card-footer text-muted">
+      Keep the good work!
+    </div>
+</div>
+{%endfor%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{%endblock%}

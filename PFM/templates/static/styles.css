@@ -1,0 +1,13 @@
+
+html, body{
+    min-width: 100%;
+    min-width: 100%;
+    padding-bottom: 100%;
+    padding-top: 100%;
+}
+
+#formulario {
+    
+    flex-direction: column;
+    
+}
