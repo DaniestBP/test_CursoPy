@@ -1,0 +1,103 @@
+{%extends "base.html"%}
+
+
+{%block head%}
+<script src ="{{url_for('static', filename='sliders.js')}}" defer></script>
+
+{%endblock%}
+
+{%block content%}
+
+
+<div>
+    <h2 class="adv_name">{{ad.adv_name.upper()}}</h2>
+</div>
+
+{%if user%}
+<a href="{{url_for('logout')}}" class="d-flex justify-content-end" style="text-decoration:none;"><button class="btn btn-success m-3" type="button">Log out
+</button></a>
+
+<a href="{{url_for('dashboard', user=user )}}" class="d-flex justify-content-start" style="text-decoration:none;">
+    <button class="btn btn-success m-3" type="button">Dashboard</button>
+</a>
+{%endif%}
+
+<div class="container-fluid bg_light">
+    <div class="slider_container ">
+        {%if not imgs%}
+        <div class="slide_picture fade">
+            <img class="img_slider" src="{{url_for('static', filename='assets/image-not-found.png')}}">
+        </div>
+        {%endif%}
+        {%for img in imgs%}
+        <div class="slide_picture fade">
+            <img class="img_slider" src="{{url_for('img_advert', img_id=img.id)}}">
+        </div>
+        {%endfor%}
+        
+        <a class="prev" onclick="plusSlides(-1)" ><img src="{{url_for('static', filename='assets/Left_Arrow.svg')}}" style="width:35px; height:40px; color: aliceblue;"></a>
+        <a class="next" onclick="plusSlides(1)" ><img src="{{url_for('static', filename='assets/Right_Arrow.svg')}}" style="width:35px; height:40px; color: aliceblue;"></a>
+    </div>
+</div>
+
+    
+
+<div class="bg-light pb-5">
+    <div>
+        <h5 class="des_tit">Summarized description:</h4>
+    </div>
+    
+    
+    <div class="descr " >
+            <div class="m_book_contain">
+                <img class="mini_book" src="{{url_for('static', filename='assets/book_icon.svg')}}" alt="">
+            </div>
+        <div>
+            <textarea class="embed_text" name="" id="" cols="90" rows="5">{{ad.description}}</textarea>
+        </div>
+    </div>
+</div>
+
+<div class="p-3" style="background-color:rgb(197, 196, 196) ; ">
+    <div>
+        <h5 class="des_tit m-2 pt-5 text-white display-6">Location:</h4>
+    </div>
+    <div class="d-flex justify-content-center mb-3" >
+        <a href="https://www.google.com/maps/place/{{ad.address}}/@{{lat}},{{lon}},17z"  target="_blank"><label for="" style="cursor:pointer">- See into Google Maps -</label></a>
+    </div>
+    
+    <div class="d-flex justify-content-center mb-5" style="position:relative;">
+        <iframe width="850" height="375" src="https://www.openstreetmap.org/export/embed.html?bbox={{lon - d_lon}}%2C{{lat - d_lat}}%2C{{lon + d_lon}}%2C{{lat + d_lat}}&amp;layer=mapnik" ></iframe>
+    </div>
+</div>
+       
+        
+
+    
+  
+<section class="">
+    <div class="footer-container">
+        <footer class="footer-distributed">
+           
+            <div class="address">
+                <img src="{{url_for('static', filename='assets/map_point.svg')}}" alt="">
+                <p><span>{{ad.address.split(", ")[0]}}</span> {{ad.address.split(", ")[1]}}</p>
+            </div>
+    
+            <div class="phone">
+                <img src="{{url_for('static', filename='assets/phone.svg')}}" alt="">
+                <p>{{ad.contact_phone}}</p>
+            </div>
+    
+            <div class="mail">
+                <img src="{{url_for('static', filename='assets/envelope.svg')}}" alt="">
+                <p>{{ad.contact_email}}</p>
+            </div>
+        </footer>
+           
+        
+    </div>
+</section>  
+
+
+{%endblock%}

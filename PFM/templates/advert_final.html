@@ -1,0 +1,59 @@
+{%extends "base.html"%}
+
+
+{%block head%}
+<script src ="{{url_for('static', filename='sliders.js')}}" defer></script>
+
+{%endblock%}
+
+{%block content%}
+
+
+<div >
+    <h2 class="adv_name">{{ad.adv_name.upper()}}</h2>
+</div>
+<div class="sticky">
+    <a href="{{url_for('dashboard', user=ad.user_id )}}" class="d-flex justify-content-end">
+        <button class="btn btn-success m-3" type="button">Dashboard</button>
+    </a>
+</div>
+{%if user%}
+<a href="{{url_for('logout')}}" class="d-flex justify-content-end" style="text-decoration:none;"><button class="btn btn-success m-3" type="button">Log out
+</button></a>
+{%endif%}
+
+<div class="slider_container">
+    {%for img in imgs%}
+    <div class="slide_picture fade">
+        <img class="img_slider" src="{{url_for('img_advert', img_id=img.id)}}">
+    </div>
+    {%endfor%}
+    
+    <a class="prev" onclick="plusSlides(-1)" ><img src="{{url_for('static', filename='Left_Arrow.svg')}}" style="width:35px; height:40px; color: aliceblue;"></a>
+    <a class="next" onclick="plusSlides(1)" ><img src="{{url_for('static', filename='Right_Arrow.svg')}}" style="width:35px; height:40px; color: aliceblue;"></a>
+    
+</div>
+
+
+<div>
+    <h5 class="des_tit">Summarized description:</h4>
+</div>
+
+
+<div class="descr">
+    
+  
+        <div class="m_book_contain">
+            <img class="mini_book" src="{{url_for('static', filename='book_icon.svg')}}" alt="">
+        </div>
+   
+    <div>
+        <textarea class="embed_text" name="" id="" cols="90" rows="5">{{adv_descr}}</textarea>
+    </div>
+</div>
+  
+    
+
+
+{%endblock%}
+

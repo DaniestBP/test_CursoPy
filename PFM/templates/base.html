@@ -13,16 +13,16 @@
     <title>You-PCEP</title>
 </head>
 
-<body style="padding-bottom:100%;">
-    <ul class="nav justify-content-around">
+<body style="background-color:rgb(222, 223, 224) ; ">
+    <ul class="nav justify-content-around" style="background-color: rgb(222, 223, 224);">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="http://localhost:5000">Home</a>
+          <a class="nav-link active text-info" aria-current="page" href="http://localhost:5000">Home</a>
         </li>
         <li id="log_l"class="nav-item">
-          <a class="nav-link justify-content-right" href="http://localhost:5000/login">Log in</a>
+          <a class="nav-link justify-content-right text-info" href="http://localhost:5000/login">Log in</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="http://localhost:5000/unsubs">Unsubscribe</a>
+          <a class="nav-link text-info" href="http://localhost:5000/unsubs ">Unsubscribe</a>
         </li>
         <li class="nav-item" hidden>
           <a class="nav-link disabled">Disabled</a>
@@ -33,15 +33,15 @@
           {% with messages = get_flashed_messages()%}
               {% if messages %}
                   {% for message in messages %}
-                      <div class="d-flex justify-content-center" style="color:rgb(216, 33, 33)">{{message}}</div>
+                  <div class="alert alert-warning" role="alert">
+                    {{message}}
+                  </div>
                   {% endfor %}
               {% endif %}
           {% endwith %}
         </p>
         {%block content%}
-        <div style="padding-top: 50% ; padding-bottom:50% ; background-image: linear-gradient(45deg, #84abff81, #5e5bf87e, #f8638380);">
-          <h2 class ="display-1 d-flex justify-content-center" style="padding-top:5% ; margin-top: -30%">{{text}}</h2>
-        </div>
+       
         {%endblock%}  
       </main>
 </body>

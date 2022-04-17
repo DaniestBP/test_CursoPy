@@ -1,0 +1,81 @@
+{%extends "base.html"%}
+{%block head%}
+
+<script src ="{{url_for('static', filename='styles.css')}}"></script>
+{%endblock%}
+{%block content%}
+
+
+<div>
+    <h2 class="adv_name">{{ad_by_type[0].business_type}}</h2>
+</div>
+
+{%if user%}
+<a href="{{url_for('logout')}}" class="d-flex justify-content-end" style="text-decoration:none;"><button class="btn btn-success m-3" type="button">Log out
+</button></a>
+
+<a href="{{url_for('dashboard', user=user )}}" class="d-flex justify-content-start" style="text-decoration:none;">
+    <button class="btn btn-success m-3" type="button">Dashboard</button>
+</a>
+{%endif%}
+
+<div id="x_outer" class="container-fluid" >
+  
+    {%for advert in ad_by_type%}
+    <div id="anc-list" class="d-flex item_all rounded bg-light" >
+        
+        <a  href="{{url_for('show_listing', advert_id=advert.id)}}" style="text-decoration:none;">
+            <div class="d-flex" id="x_inner">
+                {%if advert.images%}
+                <div class="mr-auto p-2" id="mini-pic-con">
+                    <img class="mini-pic rounded" width="260" height="155" src="{{url_for('img_advert', img_id=advert.images[0].id)}}" alt="No images uploded">
+                    <span class="tag mb-3 p-2" >{{advert.business_type}}</span>
+                </div>
+                {%endif%}
+                {%if not advert.images%}
+                <div class="mr-auto p-2" id="mini-pic-con">
+                    <img class="mini-pic rounded" width="260" height="155" src="static/image-not-found.png" alt="">
+                    <span class="tag mb-3 p-2">{{advert.business_type}}</span>
+                </div>
+                {%endif%}
+
+                <div class="p-2 text-dark m-auto" >
+                    <h4 class= mb-2 >{{advert.adv_name}}</h6>
+                    <span class="m-3 pb-2">{{advert.address}}</span>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+    {%endfor%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{%endblock%}
