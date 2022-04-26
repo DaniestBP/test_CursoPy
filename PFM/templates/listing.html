@@ -13,14 +13,7 @@
     <h2 class="adv_name">{{ad.adv_name.upper()}}</h2>
 </div>
 
-{%if user%}
-<a href="{{url_for('logout')}}" class="d-flex justify-content-end" style="text-decoration:none;"><button class="btn btn-success m-3" type="button">Log out
-</button></a>
 
-<a href="{{url_for('dashboard', user=user )}}" class="d-flex justify-content-start" style="text-decoration:none;">
-    <button class="btn btn-success m-3" type="button">Dashboard</button>
-</a>
-{%endif%}
 
 <div class="container-fluid bg_light">
     <div class="slider_container ">
@@ -62,6 +55,7 @@
     <div>
         <h5 class="des_tit m-2 pt-5 text-white display-6">Location:</h4>
     </div>
+    {%if lat and lon%}
     <div class="d-flex justify-content-center mb-3" >
         <a href="https://www.google.com/maps/place/{{ad.address}}/@{{lat}},{{lon}},17z"  target="_blank"><label for="" style="cursor:pointer">- See into Google Maps -</label></a>
     </div>
@@ -69,7 +63,21 @@
     <div class="d-flex justify-content-center mb-5" style="position:relative;">
         <iframe width="850" height="375" src="https://www.openstreetmap.org/export/embed.html?bbox={{lon - d_lon}}%2C{{lat - d_lat}}%2C{{lon + d_lon}}%2C{{lat + d_lat}}&amp;layer=mapnik" ></iframe>
     </div>
+    {%endif%}
+    
+    {%if not lat%}
+        {%if not lon%}
+    <div class="d-flex justify-content-center mb-3" >
+        <a href="https://www.google.com/maps/place/{{ad.address}}/@{{lat}},{{lon}},17z"  target="_blank"><label for="" style="cursor:pointer">- See into Google Maps -</label></a>
+    </div>
+    <p style="position: relative; margin-left:5%;">{{text}}</p>
+    <div class="d-flex justify-content-center mb-5" style="position:relative;">
+        <iframe width="850" height="375" src="https://www.openstreetmap.org/export/embed.html?bbox=%2C%2C%2C&amp;layer=mapnik"></iframe>
+    </div>
+    {%endif%}
+    {%endif%}
 </div>
+
        
         
 

@@ -18,12 +18,32 @@
         <li class="nav-item">
           <a class="nav-link active text-info" aria-current="page" href="http://localhost:5000">Home</a>
         </li>
+        {%if not user%}
         <li id="log_l"class="nav-item">
           <a class="nav-link justify-content-right text-info" href="http://localhost:5000/login">Log in</a>
         </li>
+        {%endif%}
+        {%if user%}
+        <li id="log_l"class="nav-item">
+          <a class="nav-link justify-content-right text-info" href="{{url_for('logout')}}">Log out</a>
+        </li>
+        {%endif%}
+        {%if user%}
         <li class="nav-item">
           <a class="nav-link text-info" href="http://localhost:5000/unsubs ">Unsubscribe</a>
         </li>
+        {%endif%}
+        {%if not user%}
+        <li class="nav-item">
+          <a class="nav-link text-info" href="http://localhost:5000/unsubs" hidden>Unsubscribe</a>
+        </li>
+        {%endif%}
+
+        {%if user%}
+        <li id="log_l"class="nav-item">
+          <a class="nav-link justify-content-right text-info" href="{{url_for('dashboard', user=user)}}">Dashboard</a>
+        </li>
+        {%endif%}
         <li class="nav-item" hidden>
           <a class="nav-link disabled">Disabled</a>
         </li>

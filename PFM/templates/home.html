@@ -11,17 +11,6 @@
     <img id="serv-img" src="{{url_for('static', filename='assets/serv2.jpg')}}" alt="">
     <div class="d-flex text-white" id="my-g"><h1 style="font-size:5vw">{{text}}</h1></div>
 </div>
-{%if user%}
-<a href="{{url_for('logout')}}" class="d-flex justify-content-end" style="text-decoration:none;"><button class="btn btn-success m-3" type="button">Log out
-</button></a>
-
-
-<a href="{{url_for('dashboard', user=user )}}" class="d-flex justify-content-start" style="text-decoration:none;">
-    <button class="btn btn-success m-3" type="button">Dashboard</button>
-</a>
-      
-{%endif%}
-
 
 <div class="d-flex justify-content-start p-5 text-success bg-light"><h3 style="font-size:25px;" >Featured Businesses:</h3></div>
 
@@ -47,26 +36,26 @@
 <div id="x_outer" class="container-fluid" >
   
     {%for advert in advert_all%}
-    <div id="anc-list" class="d-flex item_all rounded bg-light" >
+    <div id="anc-list" class="d-flex item_all rounded">
         {%if advert%}
         <a  href="{{url_for('show_listing', advert_id=advert.id)}}" style="text-decoration:none;">
             <div class="d-flex" id="x_inner">
                 {%if advert.images%}
                 <div class="mr-auto p-2" id="mini-pic-con">
                     <img class="mini-pic rounded" width="260" height="155" src="{{url_for('img_advert', img_id=advert.images[0].id)}}" alt="No images uploded">
-                    <span class="tag mb-3 p-2" >{{advert.business_type}}</span>
+                    <p class="tag mb-3 p-2" >{{advert.business_type}}</p>
                 </div>
                 {%endif%}
                 {%if not advert.images%}
                 <div class="mr-auto p-2" id="mini-pic-con">
                     <img class="mini-pic rounded" width="260" height="155" src="{{url_for('static', filename='assets/image-not-found.png')}}" alt="">
-                    <span class="tag mb-3 p-2">{{advert.business_type}}</span>
+                    <p class="tag">{{advert.business_type}}</p>
                 </div>
                 {%endif%}
 
-                <div class="p-2 text-dark m-auto" >
+                <div id="text_info" class="p-2 text-dark" >
                     <h4 class= mb-2 >{{advert.adv_name}}</h6>
-                    <span class="m-3 pb-2">{{advert.address}}</span>
+                    <p class="m-3 pb-2">{{advert.address}}</p>
                 </div>
             </div>
         </a>

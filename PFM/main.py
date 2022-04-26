@@ -48,21 +48,28 @@ def show_listing(advert_id):
     ad_show=Advert.query.get(advert_id)
     d_lon= 0.000334
     d_lat= 0.002245
-    lon = float(ad_show.longitude)
-    lat = float(ad_show.latitude)
     u_current= session.get("id")
     u_table = User.query.get(u_current)
-
-    if u_table:
-        user = u_table.id
-        if ad_show.images:
-            imgs = ad_show.images
-            return render_template ("listing.html", ad=ad_show, lat=lat, lon=lon, d_lon=d_lon, d_lat=d_lat, user=user,imgs=imgs)
-    if ad_show.images:
-        imgs = ad_show.images
-        return render_template ("listing.html", ad=ad_show, lat=lat, lon=lon, d_lon=d_lon, d_lat=d_lat, imgs=imgs)
+    imgs = ad_show.images
     
-    return render_template ("listing.html", ad=ad_show, lat=lat, lon=lon, d_lon=d_lon, d_lat=d_lat)
+    if u_table:
+        user=u_table.id
+        if ad_show.longitude and ad_show.latitude and u_table:
+            lon = float(ad_show.longitude)
+            lat = float(ad_show.latitude)
+            return render_template ("listing.html", ad=ad_show, lat=lat, lon=lon, d_lon=d_lon, d_lat=d_lat,imgs=imgs, user=user)
+        else:
+            return render_template ("listing.html", ad=ad_show, imgs=imgs, user=user, text="No coords given yet")
+
+    if not u_table:
+        if ad_show.longitude and ad_show.latitude:
+            lon = float(ad_show.longitude)
+            lat = float(ad_show.latitude)
+            return render_template ("listing.html", ad=ad_show, lat=lat, lon=lon, d_lon=d_lon, d_lat=d_lat,imgs=imgs)
+        else:
+            return render_template ("listing.html", ad=ad_show, text="No coords given yet")
+
+    return render_template ("listing.html", ad=ad_show)
     
 
 
@@ -148,8 +155,8 @@ def dashboard(user):
             else:
                 adverts = []
         except IndexError:
-            return render_template("u_dashboard.html", text= f"{(user.name)} dashboard")
-    return render_template("u_dashboard.html", text= f"{(user.name)} dashboard", us_adverts=adverts)
+            return render_template("u_dashboard.html", text= f"{(user.name)} dashboard", user=user)
+    return render_template("u_dashboard.html", text= f"{(user.name)} dashboard", us_adverts=adverts, user=user)
             
 
 Allowed_exten=["png", "jpg", "jpeg", "gif"]
@@ -171,15 +178,17 @@ def create_ad():
         email_ad = request.form.get("contact_email")
         lat = request.form.get("latitude")
         lon = request.form.get("longitude")
+        if not lat and lon:
+            flash ("Map location will not show up (no coords given)")
         type = request.form.get("business_type")
         if type in types_list:
             advert = Advert(id=uuid4().hex, user_id=u_id, adv_name=name,  address= address_ad, latitude=lat, longitude=lon, contact_phone=phone_ad, contact_email=email_ad, business_type=type)
-            print(advert)
             db.session.add(advert)
             db.session.commit()
             res = redirect(url_for("dashboard", user=u_id))
             # res.status_code = 307
             return res
+           
     return render_template("ad_creation.html", user=u_id, text=f"{u.name}, build it up!", ad="")
         
 
@@ -219,11 +228,11 @@ def img_advert(img_id):
 
 @app.route("/remove")
 def remove_from():
-    
+
     adv_id = request.args.get("adv_id")
     ad_to_rem =Advert.query.get(adv_id)
     if ad_to_rem:
-        flash("Your space is being removed")
+        flash("Your space was removed")
         db.session.delete(ad_to_rem)
         db.session.commit()
         return redirect(url_for("dashboard", user=ad_to_rem.user_id))
