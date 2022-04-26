@@ -5,7 +5,7 @@ from os import system
 
 species_fire = {"weaknesses": ["water", "ground"]}
 species_water = {"weaknesses": ["grass", "ground"]}
-species_grass = {"weaknesses": "fire"}
+species_grass = {"weaknesses": ["fire"]}
 species = [species_fire,species_water, species_grass]
 
 class Pokemon:
@@ -33,11 +33,15 @@ class Pokemon:
         self.attacks.append(attack)
     
     def receive_damage(self, attack):
-        if self.species["weaknesses"] in attack.species:
-            is_weakness = True
-            weakness = True if is_weakness else False
-            self.HP -= attack.damage * 1.5 if weakness else attack.damage
-            True
+
+        for type in self.species.values():
+            if type in attack.species.values():
+                weakness = True
+                is_weak = True if weakness else False
+                total_damage = attack.damage * 1.5 if is_weak else attack.damage
+                self.HP -= total_damage
+               
+        
 
         self.species, attack.species
         if self.HP <= 0:
@@ -85,12 +89,14 @@ Rino.learn_attack(DeepGoring)
 Rino.learn_attack(RinoDash)
 # Charmander
 Charmander.learn_attack(Firethrower)
+
+
 Charmander.learn_attack(Flame)
 Charmander.learn_attack(CharmaPunch)
 
 # Charmander.receive_damage(Rino.attacks[0])  
 
-print(type(Rino.attacks))
+print(type(Rino.attacks[0]))
 # v1.0 exp_rate = 1 
 # print(Pokemon.xp_rate)
 
@@ -101,23 +107,28 @@ print(type(Rino.attacks))
 
 user = ""
 
+print("\n", "Rino", Rino.HP, "vs", "Charmander",Charmander.HP, "\n")
 while user != "q":
     
-    print("\n", "Rino", Rino.HP, "vs", "Charmander",Charmander.HP, "\n")
     print(f"Escoge tu ataque " + "\n")
     for i, attack in enumerate(Rino.attacks):
         print(f"{i + 1}. {attack.name}")
 
-    user_index = int(input(" ")) - 1
+    user_index = int(input("Select one attack: ")) - 1
     attack_chosen = Rino.attacks[user_index]
     Charmander.receive_damage(attack_chosen)
+    print(f"Rino ataca {attack_chosen.name} por {attack_chosen.damage} pts y reduce la vida de Charmander a {Charmander.HP}")
     
     Charmander_attack  = random.choice(Charmander.attacks)
-    print(f"Charmander ataca {Charmander_attack.name} y te quita {Charmander_attack.damage} pts de vida")
     Rino.receive_damage(Charmander_attack)
+    
+    print(f"Charmander ataca {Charmander_attack.name} por {Charmander_attack.damage} pts y tu vida es {Rino.HP}")
+    
+    print("\n", "Rino", Rino.HP, "vs", "Charmander",Charmander.HP, "\n")
+    
     if Charmander.is_alive == False:
         print("\n"* 2, "GAME OVER")
-    
+    input()
 
     # system("clear")
     

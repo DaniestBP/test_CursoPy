@@ -55,13 +55,37 @@ const grade_test = async () => {
 function alert_f() {
     alert("You will be logged out");
 };
-var fifteen_mins = (15 * 60 * 1000)
-const count_down = () => {
-    let counter = 0;
-    setInterval(() => {
-        console.log(counter)
+// var countdown = (Date().now) + fifteen_mins
+// const count_down = () => {
     
-    }, 1000);
-};
+//     const starting = setInterval(() => {
+//         var distance = (15 * 60 * 1000)
+//         var mins =  Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+//         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+//         document.getElementById("start").innerText = mins + "mins" + seconds + "secs" 
+//         if (distance < 0) {
+//             clearInterval(starting);
+//             document.getElementById("start").innerText = "TIME UP"
+//         }
+        
+//         }, 1000);
+// };
 
+   
+        
+
+const count_down = () => {
+    var test_time = 60*15;//
+    var start_timer = setInterval(() =>{
+        test_time -- ;
+        var minutes = Math.floor((test_time % ( 60 * 60)) / ( 60)); 
+        var seconds = Math.floor((test_time % ( 60)) / 1);
+        console.log(seconds)
+        document.getElementById("start").innerText = `${minutes} mins ${seconds} secs`
+        if (test_time < 0) {
+            clearInterval(start_timer); 
+            document.getElementById("start").innerText = "TIME's UP!"
+        }
+    },1000)
+};
 

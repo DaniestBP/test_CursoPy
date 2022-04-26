@@ -117,7 +117,7 @@ def coo():
             test_q = Test_question(id=uuid4().hex, test_id =t_id, question_id=q_id, user_choice = u_ans)
             db.session.add(test_q)
             
-        # db.session.commit()
+        db.session.commit()
         print(result)    
     return result
             

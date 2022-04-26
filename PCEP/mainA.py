@@ -151,11 +151,11 @@ def coo():
         q_a = Questions.dict_q_a() #Hemos definido una clase de metodo en models.py dentro de Questions llamado dict_q_a para convertir a diccionario el id de la pregunta y el id de la respuesta correcta
         # print(q_a["a5c0f5a6ebdd4809b9af4f3d745e06f5"])
         answers = request.get_json()
-        print(answers[0])
+        # print(answers[0])
         result = {"grade":0, "answers":{}}
         for answer in answers:
             result["answers"][answer[1]] = False
-            print(answer[0])
+            # print(answer[0])
             if q_a[answer[0]] == answer[1]:
                 result["grade"] +=1
                 result["answers"][answer[1]] = True

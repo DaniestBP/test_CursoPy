@@ -1,4 +1,4 @@
-## COMANDOS VENV
+.q## COMANDOS VENV
 
 python3 -m venv <venv_name>
 source venv/Scripts/activate (( Windows)) 
