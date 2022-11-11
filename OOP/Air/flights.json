@@ -1,0 +1,76 @@
+{
+    "tickets": [
+        {
+            "ticket_id": "111443",
+            "time": "2022-01-11 15:23:55.923528",
+            "from": "Madrid",
+            "to": "Buenos Aires",
+            "departure at": "2022-01-12 19:00:00",
+            "flight_time": 13,
+            "Arrival_times": {
+                "Arrival_origin": "2022-01-13 08:00:00",
+                "Arrival_destination": "2022-01-13 04:00:00"
+            }
+        },
+        {
+            "ticket_id": "226516",
+            "time": "2022-01-11 15:29:51.979784",
+            "from": "Lima",
+            "to": "Sao Paulo",
+            "departure at": "2022-01-12 15:30:00",
+            "flight_time": 4.9,
+            "Arrival_times": {
+                "Arrival_origin": "2022-01-12 20:24:00",
+                "Arrival_destination": "2022-01-12 22:24:00"
+            }
+        },
+        {
+            "ticket_id": "428338",
+            "time": "2022-01-11 15:30:36.588155",
+            "from": "Sao Paulo",
+            "to": "Lima",
+            "departure at": "2022-01-12 22:00:00",
+            "flight_time": 4.9,
+            "Arrival_times": {
+                "Arrival_origin": "2022-01-13 02:54:00",
+                "Arrival_destination": "2022-01-13 00:54:00"
+            }
+        },
+        {
+            "ticket_id": "656484",
+            "time": "2022-01-11 15:43:08.604736",
+            "from": "Buenos Aires",
+            "to": "Lima",
+            "departure at": "2022-01-12 12:30:00",
+            "flight_time": 4.5,
+            "Arrival_times": {
+                "Arrival_origin": "2022-01-12 17:00:00",
+                "Arrival_destination": "2022-01-12 15:00:00"
+            }
+        },
+        {
+            "ticket_id": "675349",
+            "time": "2022-01-11 16:42:08.622688",
+            "from": "Lima",
+            "to": "Madrid",
+            "departure at": "2022-01-12 04:30:00",
+            "flight_time": 14.5,
+            "Arrival_times": {
+                "Arrival_origin": "2022-01-12 19:00:00",
+                "Arrival_destination": "2022-01-13 01:00:00"
+            }
+        },
+        {
+            "ticket_id": "530725",
+            "time": "2022-01-11 16:47:43.945660",
+            "from": "Madrid",
+            "to": "Buenos Aires",
+            "departure at": "2022-01-12 11:30:00",
+            "flight_time": 13,
+            "Arrival_times": {
+                "Arrival_origin": "2022-01-13 00:30:00",
+                "Arrival_destination": "2022-01-12 20:30:00"
+            }
+        }
+    ]
+}

@@ -1,0 +1,85 @@
+{%extends "base.html"%}
+
+
+{%block content%}
+
+
+<div>
+    <h2 class ="d-flex justify-content-center" style="padding:5%">{{text}}</h2>
+    <div class="sticky">
+        {%if ad%}
+        <a href="{{url_for('dashboard', user=ad.user_id )}}" class="d-flex justify-content-start" style="text-decoration:none;">
+            <button class="btn btn-success m-3" type="button">Dashboard</button>
+        </a>
+        {%endif%}
+        {%if user%}
+        <a href="{{url_for('dashboard', user=user )}}" class="d-flex justify-content-start" style="text-decoration:none;">
+            <button class="btn btn-success m-3" type="button">Dashboard</button>
+        </a>
+        {%endif%}
+    </div>
+</div>
+
+
+<div id= "formulario" class="d-flex justify-content-center bg-light">
+    <form  action="" method="POST" >
+        <ul class="d-flex-row ad_crea_list" >
+            <li>
+                <label for="">Name of business: 
+                    <input  type="text" name="adv_name" id="" placeholder="{{ad.adv_name}}" required>
+                </label>
+            </li>
+           
+            <li>
+                <label for="">Address:
+                    <input  type="text" name="address" id="" placeholder=" {{ad.address}}" required>
+                </label>
+            </li>
+           
+            <li>
+                <label for="">Contact phone: 
+                    <input  type="text" name="contact_phone" placeholder="{{ad.contact_phone}}" id="" required>
+                </label>
+            </li>
+           
+            <li>
+                <label for="">Email of contact: 
+                    <input  type="email" name="contact_email" placeholder="{{ad.contact_email}}" id="" required>
+                </label>
+            </li>
+           
+            <li>
+                <label for="">Latitude: 
+                    <input  type="text" name="latitude" placeholder="{{ad.latitude}} "id="" >
+                </label>
+            </li>
+           
+            <li>
+                <label for="">Longitude: 
+                    <input  type="text" name="longitude" placeholder="{{ad.longitude}}" id="" >
+                </label>
+            </li>
+           
+            <li>
+                <label for="">Type of business: </label>
+                    <select name="business_type" id=""> 
+                        <option value="Solicitors">Solicitors</option>
+                        <option value="Restaurants-Bars">Restaurants-Bars</option>
+                        <option value="Hotels">Hotels</option>
+                        <option value="Veterinary">Veterinary</option>
+                        <option value="Hairdressing">Hairdressing</option>
+                        <option value="Groceries">Groceries</option>
+                        <option value="Nurseries">Nurseries</option>
+                        <option value="Agencies">Agencies</option>
+                        <option value="Others">Others</option>
+                    </select> {{ad.business_type}}
+            </li>
+        </ul>
+    
+        <button class="btn btn-primary float-right m-auto" style="position:absolute; left:65%;" type="submit">Submit</button>
+    </form>
+</div>
+       
+        
+
+{%endblock%}

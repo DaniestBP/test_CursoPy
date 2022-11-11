@@ -1,0 +1,33 @@
+{%extends "base.html"%}
+
+
+{%block content%}
+
+<h2 class ="d-flex justify-content-center" style="padding:5%">{{text}}</h2>
+
+<div id= "formulario" class="d-flex justify-content-center ">
+    <form  action="" method="POST" >
+        <div>
+            <label for="">Full name
+                <input style="padding-left:52px;" type="text" name="name" id="" required>
+            </label>
+        </div>
+        <br>
+        <div>
+            <label for="">Email address
+                <input style="padding-left:25px;" type="text" name="email" id="" required>
+            </label>
+        </div>
+        <br>
+        <div>
+            <label for="">Password
+                <input style="padding-left:55px;"type="password" name="pwd" id="" required>
+            </label>
+        </div>
+        <br>
+        <button class="btn btn-primary float-right" type="submit">Submit</button>
+        
+    </form>
+</div>
+
+{%endblock%}

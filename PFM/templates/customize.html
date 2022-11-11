@@ -1,0 +1,37 @@
+{%extends "base.html"%}
+
+{%block head%}
+
+<script src ="{{url_for('static', filename='styles.css')}}"></script>
+{%endblock%}
+
+{%block content%}
+<div>
+    <h2 class ="d-flex justify-content-center mt-5">{{text}}</h2>
+</div>
+<form action="" method="post" enctype="multipart/form-data">
+    <div class="form-row align-items-center" >
+        <div class="col-auto" style="margin-left: 50px">
+        <label class="sr-only" for="msg">Describe briefly your business activity to your potential customers: ( max 150 charac.)</label>
+            
+            <textarea class="d-flex justify-content-start" id="msg" name="adver_description" id ="" cols="130" rows="10">{{ad.description if ad.description else ''}} </textarea>
+        </div>
+    </div>
+    <br>
+
+    
+    <p style="margin-left:50px;  margin-top: 5%">Please, consider to upload some photos to make your space more attractive : </p>
+    
+    <div class="d-flex justify-content-start pt-1" style="margin-left: 50px">
+        <label>Select Image File: </label>
+        <input type="file" name="image" style="margin-left: 0.5rem;" multiple>
+        <div class="mx-auto">
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+{%endblock%}
